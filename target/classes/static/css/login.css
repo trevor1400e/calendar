@@ -1,0 +1,104 @@
+.wrapper {    
+	margin-top: 80px;
+	margin-bottom: 20px;
+}
+
+
+.form-signin {
+  max-width: 420px;
+  padding: 30px 38px 66px;
+  margin: 0 auto;
+  background-color: #272727;
+  border: 3px dotted rgba(0,0,0,0.1);  
+  }
+
+.form-signin-heading {
+  text-align:center;
+  margin-bottom: 30px;
+}
+
+.form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
+
+input[type="text"] {
+  margin-bottom: 0px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+#bg {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+
+body {
+background-color: transparent !important;
+height: 100%;
+}
+
+.retro {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 0 auto;
+  border: none;
+  font: normal 82px/normal "Anton", Helvetica, sans-serif;
+  font-size: 55px;
+  color: rgba(255,255,255,1);
+  text-align: center;
+  text-transform: uppercase;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  letter-spacing: 10px;
+  text-shadow: 4px 4px 0 rgba(58,58,58,1) , 6px 6px 0 rgba(35,35,35,1) ;
+}
+
+.whitetext2 {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: none;
+  font: normal 75px/0 "knewave", Helvetica, sans-serif;
+  color: #ffffff;
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  text-shadow: 4px 4px 6px rgba(0,0,0,0.5) ;
+}
+
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+.hometxt {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: none;
+  font: normal 76px/1 "alfa-slab-one", Helvetica, sans-serif;
+  color: #333333;
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.5) ;
+}
+
+
