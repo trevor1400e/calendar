@@ -37,5 +37,26 @@
 <br />
 <br />
 <span th:utext="${eventDate}"></span>
+<br />
+
+    
+    <form action="#" th:action="'/charge/'+${event.id}" method="POST" id="checkout-form">
+    <input type='hidden' th:value='${eventPrice+30}' name='amount' />
+    <label>Price (+30 cent fee):<span th:text='${eventPrice+30}' /></label>
+    <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+    <script
+       src='https://checkout.stripe.com/checkout.js'
+       class='stripe-button'
+       th:attr='data-key=${stripePublicKey}, 
+       data-amount=${eventPrice+30}, 
+       data-currency=${currency},data-email=${userEmail}'
+       data-name='Ticket Shop'
+       data-bitcoin=true
+       data-description='Spring test checkout'
+       data-image='http://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'
+       data-locale='auto'
+       data-zip-code='false'>
+   </script>
+</form>
 </body>
 </html>

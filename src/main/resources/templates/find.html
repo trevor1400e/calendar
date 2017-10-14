@@ -31,16 +31,26 @@
 </nav>
 
   <div class="row">
-<div class="col-sm-12 text-center"><h1>Find a party!</h1></div>
+<div class="col-sm-12 text-center"><h1>Find a party! <span th:utext="${eventCount}"></span> Parties.</h1></div>
   </div>
 <br />
 <!-- search func -->
   <div class="row">
-  <div class="col-sm-4  col-sm-offset-4">
-  <input type="text" id="search" name="search"  th:placeholder="Search" class="form-control" /> 	</div>
+  	<form autocomplete="off" action="#" th:action="'/find'" method="POST" class="form-horizontal" role="form">
+				
+		   <div class="col-sm-4  col-sm-offset-4">
+		   
+  <input type="text" id="search" name="search"  th:placeholder="Search" class="form-control" /> 
+  <input type="hidden" name="searchtype" value="textsearch">	
+  <span th:utext="${successMessage}"></span>
+  </div>
+
 	<div class="col-sm-1">	
 	<button class="btn btn-lg btn-primary btn-block" name="Submit" value="search" type="Submit" th:text="Search"></button>
 	</div>		
+                
+    </form>
+ 
 	<div class="col-sm-3">	
 		</div>	
 </div>
@@ -57,43 +67,23 @@ zipcode
 <br />
 price
 </div>
+  
+
 <div class="col-sm-1"></div>
-<div class="col-sm-6" style="background-color:#f1f1f1;">
+<div class="col-sm-6" id="divevents" style="background-color:#f1f1f1;">
 <br />
 <div class="row">
 <div class="col-sm-3"><img th:src="@{/images/4.png}" width=100% height=100% alt="Logo" /></div>
 <div class="col-sm-9">
 <div class="row">
-<div class="col-sm-12"><h3><a th:href="@{/event/1}"> Party 1</a></h3></div>
+<div class="col-sm-12"><h3><a th:href="@{/event/3}"> Sponsored Party 1</a></h3></div>
 <br />
 <div class="col-sm-12">Content</div>
 </div>
 </div>
 </div>
 
-<br />
-<div class="row">
-<div class="col-sm-3"><img th:src="@{/images/12.png}" width=100% height=100% alt="Logo" /></div>
-<div class="col-sm-9">
-<div class="row">
-<div class="col-sm-12"><h3><a th:href="@{/event/2}"> Party 2</a></h3></div>
-<br />
-<div class="col-sm-12">Content</div>
-</div>
-</div>
-</div>
 
-<br />
-<div class="row">
-<div class="col-sm-3"><img th:src="@{/images/14.jpg}" width=100% height=100% alt="Logo" /></div>
-<div class="col-sm-9">
-<div class="row">
-<div class="col-sm-12"><h3>Title</h3></div>
-<br />
-<div class="col-sm-12">Content</div>
-</div>
-</div>
-</div>
 
 
 
@@ -101,6 +91,98 @@ price
 </div>
 <div class="col-sm-2"></div>
 </div>
+<span id="scheck" th:utext="${searchType}" style="visibility: hidden"></span>
+  <span id="eventhold" th:utext="${titles}" style="visibility: hidden"></span>
+  <span id="eventlinks" th:utext="${links}" style="visibility: hidden"></span>
+
+
+
+<script>
+function create() {
+var outrow = document.createElement("DIV");
+var firstcol = document.createElement("DIV");
+var theimg = document.createElement("IMG");
+var fillcol = document.createElement("DIV");
+var inrow = document.createElement("DIV");
+var sndcol = document.createElement("DIV");
+var title = document.createElement("H3");
+var titlelink = document.createElement("A");
+var space = document.createElement("BR");
+var lastcol = document.createElement("DIV");
+var content = document.createTextNode("Title or content");
+var element = document.getElementById("divevents");
+
+outrow.setAttribute("id", "out row");
+firstcol.setAttribute("id", "firstcol");
+fillcol.setAttribute("id", "fillcol");
+inrow.setAttribute("id", "in row");
+sndcol.setAttribute("id", "sndcol");
+
+
+
+outrow.className = "row";
+
+firstcol.className = "col-sm-3";
+
+fillcol.className = "col-sm-9";
+
+sndcol.className = "col-sm-12";
+
+theimg.setAttribute("src", "/images/4.png");
+theimg.setAttribute("width", "100%");
+theimg.setAttribute("height", "100%");
+theimg.setAttribute("alt", "Logo");
+
+inrow.className = "row";
+
+
+titlelink.setAttribute("href", "/event/"+(links[index]).replace(" ", ""));
+
+
+lastcol.className = "col-sm-12";
+
+
+titlelink.innerHTML+= resarray[index];
+title.innerHTML+= titlelink.outerHTML;
+sndcol.innerHTML+= title.outerHTML;
+lastcol.innerHTML+= "Content";
+inrow.innerHTML+= sndcol.outerHTML + space.outerHTML + lastcol.outerHTML;
+fillcol.innerHTML+= inrow.outerHTML;
+firstcol.innerHTML+= theimg.outerHTML;
+outrow.innerHTML+= space.outerHTML + firstcol.outerHTML + fillcol.outerHTML;
+
+element.appendChild(outrow);
+}
+</script>
+
+<script>
+var scheckelm = document.getElementById("scheck");
+var eventholder = document.getElementById("eventhold");
+var eventlinker = document.getElementById("eventlinks");
+if(scheckelm.innerHTML == "textsearch"){
+
+var res = eventholder.innerHTML.replace("[", "");
+var res2 = res.replace("]", "");
+var resarray = res2.split(",");
+
+var link = eventlinker.innerHTML.replace("[", "");
+var link2 = link.replace("]", "");
+var links = link2.split(",");
+
+
+for (index = 0; index < resarray.length; ++index) {
+ create();
+}
+
+
+}
+
+
+</script>
+
+
+
+
 
 </body>
 </html>

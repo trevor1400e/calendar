@@ -22,7 +22,15 @@ public class Event {
 	private String content;
 	@Column(name="date")
 	private String date;
+	@Column(name="price")
+	private Double price;
 	
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 	public int getId() {
 		return id;
 	}

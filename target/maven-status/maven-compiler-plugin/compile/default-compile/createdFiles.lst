@@ -1,0 +1,12 @@
+com\example\repository\EventRepository.class
+com\example\controller\LoginController.class
+com\example\model\Role.class
+com\example\DemoApplication.class
+com\example\model\Event.class
+com\example\model\User.class
+com\example\configuration\WebMvcConfig.class
+com\example\repository\RoleRepository.class
+com\example\repository\UserRepository.class
+com\example\service\UserServiceImpl.class
+com\example\service\UserService.class
+com\example\configuration\SecurityConfiguration.class
