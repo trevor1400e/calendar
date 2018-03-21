@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.scribejava:scribejava-apis:5.2.0-java7again">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/scribejava/scribejava-apis/5.2.0-java7again/scribejava-apis-5.2.0-java7again.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/scribejava/scribejava-apis/5.2.0-java7again/scribejava-apis-5.2.0-java7again-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/scribejava/scribejava-apis/5.2.0-java7again/scribejava-apis-5.2.0-java7again-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -11,7 +11,11 @@ import com.example.model.Event;
 public interface EventRepository extends JpaRepository<Event, Integer>{
 	
 	Event findById(int id);
+
+	List<Event> findAll();
 	
 	List<Event> findByTitleContaining(String title);
+
+	List<Event> findByTeam(String team);
 
 }

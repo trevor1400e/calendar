@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,12 @@ import com.example.repository.UserRepository;
 @Service("userService")
 public class UserServiceImpl implements UserService{
 
+	@Qualifier("userRepository")
 	@Autowired
-	private UserRepository userRepository;
+	public UserRepository userRepository;
+	@Qualifier("roleRepository")
 	@Autowired
-    private RoleRepository roleRepository;
+    public RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -34,12 +37,12 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void saveUser(User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setActive(1);
-        user.setBalance(0.0);
-        Role userRole = roleRepository.findByRole("USER");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-		userRepository.save(user);
+		//user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+       // user.setActive(1);
+	   // user.setBalance(10.0);
+        //Role userRole = roleRepository.findByRole("USER");
+        //user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+		//userRepository.save(user);
 	}
 
 

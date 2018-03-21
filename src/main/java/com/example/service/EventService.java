@@ -9,4 +9,6 @@ public interface EventService {
 	public Event getEvent(int id);
 	
 	public List<Event> searchEventsByTitle(String title);
+
+	public List<Event> findByTeam(String team);
 }

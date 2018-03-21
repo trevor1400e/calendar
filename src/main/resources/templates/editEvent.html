@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Create Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/host.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" th:href="@{|/calendar/${curDate}|}">CenturyLink</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li  class="active"><a th:href="@{|/calendar/${curDate}|}">Calendar</a></li>
+        <li><a th:href="@{/pair}">Pairing Board</a></li>
+    </ul>
+    
+        <ul class="nav navbar-nav navbar-right">
+      <li><span class="navbar-text" th:utext="${userName}"></span></li>
+		<li><p class="navbar-text">   |  </p></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<br/>
+<br/>
+
+
+    <div class="panel panel-primary" style="margin: 0 auto; width: 80%;">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><h4>Edit Event: "<span th:text="${event.title}"></span>"</h4></div>
+        <div class="panel-body">
+            <div class="inner contact">
+                <!-- Form Area -->
+                <div class="contact-form">
+                    <!-- Form -->
+                    <form autocomplete="off" action="#" th:action="@{/calendar/edit/{eventId}(eventId=${eventId})}" th:object="${event}" method="POST" class="form-horizontal" role="form">
+                        <!-- Left Inputs -->
+                        <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
+                            <!-- Name -->
+                            <input type="text" name="title" id="title" th:field="*{title}" required="required" class="form" placeholder="Event Title" />
+                            <br />
+                            <br />
+                            <input type="text" name="description" id="description" th:field="*{description}" class="form" placeholder="Event Description (Optional)" />
+
+                        </div><!-- End Left Inputs -->
+                        <!-- Right Inputs -->
+                        <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
+                            <input type="text" name="team" id="team" th:field="*{team}" required="required" class="form" placeholder="Event Team" />
+                            <br/>
+                            <br/>
+                            <input type="text" name="date" id="date" th:field="*{date}" required="required" class="form" placeholder="The Date" />
+                            <br/>
+                            <br/>
+                        </div><!-- End Right Inputs -->
+                        <!-- Bottom Submit -->
+                        <div class="relative fullwidth col-xs-12">
+                            <!-- Send Button -->
+                            <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button>
+                            <span th:utext="${successMessage}"></span>
+                        </div><!-- End Bottom Submit -->
+                        <!-- Clear -->
+                        <div class="clear"></div>
+                    </form>
+
+                    <!-- Your Mail Message -->
+                    <div class="mail-message-area">
+                        <!-- Message -->
+                        <div class="alert gray-bg mail-message not-visible-message">
+                            <strong>Thank You !</strong> Your email has been delivered.
+                        </div>
+                    </div>
+
+                </div><!-- End Contact Form Area -->
+            </div><!-- End Inner -->
+        </div>
+    </div>
+
+
+
+</body>
+</html>

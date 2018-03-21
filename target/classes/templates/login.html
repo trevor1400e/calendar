@@ -41,7 +41,9 @@
 		</form>
 				<form th:action="@{/registration}" method="get">
 		<button class="btn btn-md btn-warning btn-block form-signin" type="Submit" style="bottom: 100px;">Register</button>
-	</form>	
+					<script>window.location.href = "https://slack.com/oauth/authorize?scope=identity.basic,identity.email&client_id=2343066523.324821885316";
+					</script>
+					<a href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email&client_id=2343066523.324821885316"><img alt="Sign in with Slack" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" /></a>	</form>
 
 	</div>
 

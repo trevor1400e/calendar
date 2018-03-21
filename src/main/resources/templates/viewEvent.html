@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Create Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/host.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" th:href="@{|/calendar/${curDate}|}">CenturyLink</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li  class="active"><a th:href="@{|/calendar/${curDate}|}">Calendar</a></li>
+        <li><a th:href="@{/pair}">Pairing Board</a></li>
+    </ul>
+    
+        <ul class="nav navbar-nav navbar-right">
+      <li><span class="navbar-text" th:utext="${userName}"></span></li>
+		<li><p class="navbar-text">   |  </p></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+<br/>
+
+    <div class="panel panel-primary" style="margin: 0 auto; width: 80%;">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><h4><span th:text="${event.title}"></span></h4></div>
+        <div class="panel-body">
+            <p id="desc"></p>
+        </div>
+
+        <!-- Table -->
+        <table class="table text-center">
+            <tr>
+                <th class="text-center" style="width: 33%">Team</th>
+                <th class="text-center" style="width: 33%">Date (yyyy-mm-dd)</th>
+                <th class="text-center" style="width: 34%">Last Updated By</th>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid #c8c8c8"><span th:text="${event.team}"></span></td>
+                <td style="border-right: 1px solid #c8c8c8"><span th:text="${event.date}"></span></td>
+                <td><span th:text="${event.name}"></span></td>
+            </tr>
+        </table>
+    </div>
+<br/>
+    <div class="text-center">
+        <button onclick="editUrl()" id="submit" name="submit" class="btn btn-success" style="margin: 0 auto; width: 20%;">Edit</button>
+    </div>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var description = "No description.";
+
+            if([[${event.description}]] != null && [[${event.description}]] != ""){
+                description = [[${event.description}]]
+            }
+
+            document.getElementById('desc').innerHTML = description;
+
+            function editUrl() {
+            window.location.href = window.location.origin+'/calendar/'+'edit/'+[[${event.id}]];
+            }
+        /*]]>*/
+    </script>
+
+
+</body>
+</html>

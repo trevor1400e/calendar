@@ -23,5 +23,8 @@ public class EventServiceImpl implements EventService{
 	public List<Event> searchEventsByTitle(String title) {
 		return eventRepo.findByTitleContaining(title);
 	}
+
+	@Override
+	public List<Event> findByTeam(String team){return eventRepo.findByTeam(team);}
 	
 }

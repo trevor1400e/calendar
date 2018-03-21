@@ -105,7 +105,7 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
+
 
 	public Double getBalance() {
 		return balance;

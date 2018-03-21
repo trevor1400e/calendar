@@ -17,9 +17,8 @@
       <a class="navbar-brand" href="#">LogoHere</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a th:href="@{/host}">Host</a></li>
-      <li><a th:href="@{/find}">Find</a></li>
+      <li><a th:href="@{|/calendar/${Date}|}">Calendar</a></li>
+      <li><a th:href="@{/pair}">Pairing Board</a></li>
     </ul>
     
         <ul class="nav navbar-nav navbar-right">
@@ -31,14 +30,10 @@
   </div>
 </nav>
  <div class="row">
-  <div class="col-sm-6 text-center"><h1 class="hometxt">Host</h1></div>
-  <div class="col-sm-6 text-center"><h1 class="hometxt">Find</h1></div>
+  <div class="col-sm-6 text-center"><h1 class="hometxt">Calendar</h1></div>
+  <div class="col-sm-6 text-center"><h1 class="hometxt">Pair</h1></div>
    </div>
-<div class="row">
-<div class="col-sm-4 col-sm-offset-2"><a th:href="@{/host}"><img th:src="@{/images/host.png}" width="300" height="300" alt="Logo" /></a></div>
-	  <div class="col-sm-4 col-sm-offset-2"><a th:href="@{/find}"><img th:src="@{/images/find.png}" width="250" height="250" alt="Logo" /></a></div>
- </div>
- 
+
 		<form th:action="@{/logout}" method="get">
 			<button class="btn btn-md btn-danger btn-block" name="registration"
 				type="Submit">Logout</button>	
