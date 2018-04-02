@@ -2,26 +2,15 @@ package com.example.model
 
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.validator.constraints.NotEmpty
-import org.springframework.context.annotation.Configuration
-import org.springframework.transaction.annotation.Transactional
 
-import javax.persistence.CascadeType
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.JoinTable
-import javax.persistence.ManyToMany
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "slack_login")
 class SlackUser {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     @Column(name = "name")
@@ -39,6 +28,7 @@ class SlackUser {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 */
+
     int getId() {
         return id
     }
@@ -59,11 +49,11 @@ class SlackUser {
         return name
     }
 
-    String getDate(){
+    String getDate() {
         return regDate
     }
 
-    void setDate(String regDate){
+    void setDate(String regDate) {
         this.regDate = regDate
     }
 
@@ -79,7 +69,6 @@ class SlackUser {
     void setEmail(String email) {
         this.email = email
     }
-
 
 /*
     Set<Role> getRoles() {

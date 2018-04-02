@@ -1,21 +1,20 @@
 package com.example.repository;
 
-import java.util.List;
-
+import com.example.model.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.model.Event;
+import java.util.List;
 
 @Repository("eventRepository")
-public interface EventRepository extends JpaRepository<Event, Integer>{
-	
-	Event findById(int id);
+public interface EventRepository extends JpaRepository<Event, Integer> {
 
-	List<Event> findAll();
-	
-	List<Event> findByTitleContaining(String title);
+    Event findById(int id);
 
-	List<Event> findByTeam(String team);
+    List<Event> findAll();
+
+    List<Event> findByTitleContaining(String title);
+
+    List<Event> findByTeamTeamname(String team);
 
 }

@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Event Page</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Event Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-	<nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" th:href="@{/home}">LogoHere</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a th:href="@{/home}">Home</a></li>
-      <li><a th:href="@{/host}">Host</a></li>
-      <li><a th:href="@{/find}">Find</a></li>
-    </ul>
-    
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/home}">LogoHere</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/home}">Home</a></li>
+            <li><a th:href="@{/host}">Host</a></li>
+            <li><a th:href="@{/find}">Find</a></li>
+        </ul>
+
         <ul class="nav navbar-nav navbar-right">
-      <li><span class="navbar-text" th:utext="${userName}"></span></li>
-		<li><p class="navbar-text">   |  </p></li>
+            <li><span class="navbar-text" th:utext="${userName}"></span></li>
+            <li><p class="navbar-text"> | </p></li>
             <li><a th:href="@{/logout}">Logout</a></li>
-    </ul>
-  </div>
+        </ul>
+    </div>
 </nav>
 
 <div class="col-sm-12 text-center"><h1>Thanks for purchasing!</h1></div>
-<br />
+<br/>
 <h3>Price: $<span th:utext="${purchase.amount}"></span></h1>
-<br />
-<h3>Title: <span th:utext="${purchase.event.title}"></span></h3>
-<br />
-<br />
-<span th:utext="${purchase.user.email}"></span>
+    <br/>
+    <h3>Title: <span th:utext="${purchase.event.title}"></span></h3>
+    <br/>
+    <br/>
+    <span th:utext="${purchase.user.email}"></span>
 
-<h3 th:if='${error}' th:text='${error}' style='color: red;'></h3>
-        <div th:unless='${error}'>
-        
-        	<img th:src="'/getImage/'+${id}+'.png'" width="200px" height="200px">
-            <h3 style='color: green;'>Success!</h3>
-            <div>Id.: <span th:text='${id}' /></div>
-            <div>Status: <span th:text='${status}' /></div>
-            <div>Charge amount.: <span th:text='${chargeAmount}' /></div>
-            <div>Balance transaction id.: <span th:text='${balance_transaction}' /></div>
-        </div>
-        <a href='/home.html'>Checkout again</a>
+    <h3 th:if='${error}' th:text='${error}' style='color: red;'></h3>
+    <div th:unless='${error}'>
+
+        <img th:src="'/getImage/'+${id}+'.png'" width="200px" height="200px">
+        <h3 style='color: green;'>Success!</h3>
+        <div>Id.: <span th:text='${id}'/></div>
+        <div>Status: <span th:text='${status}'/></div>
+        <div>Charge amount.: <span th:text='${chargeAmount}'/></div>
+        <div>Balance transaction id.: <span th:text='${balance_transaction}'/></div>
+    </div>
+    <a href='/home.html'>Checkout again</a>
 
 
 </body>
