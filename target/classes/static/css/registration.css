@@ -1,54 +1,54 @@
 .validation-message {
-	font-style: normal;
-	font-size: 12px;
-	color: #FF1C19;
+    font-style: normal;
+    font-size: 12px;
+    color: #FF1C19;
 }
 
 #bg {
-  position: fixed; 
-  top: 0; 
-  left: 0; 
+    position: fixed;
+    top: 0;
+    left: 0;
 
-  /* Preserve aspet ratio */
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -1;
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
 }
 
 body {
-background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 .retro {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  margin: 0 auto;
-  border: none;
-  font: normal 82px/normal "Anton", Helvetica, sans-serif;
-  color: rgba(255,255,255,1);
-  text-align: center;
-  text-transform: uppercase;
-  -o-text-overflow: clip;
-  text-overflow: clip;
-  letter-spacing: 10px;
-  text-shadow: 4px 4px 0 rgba(58,58,58,1) , 6px 6px 0 rgba(35,35,35,1) ;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    margin: 0 auto;
+    border: none;
+    font: normal 82px/normal "Anton", Helvetica, sans-serif;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    text-transform: uppercase;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    letter-spacing: 10px;
+    text-shadow: 4px 4px 0 rgba(58, 58, 58, 1), 6px 6px 0 rgba(35, 35, 35, 1);
 }
 
 .whitetext {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  border: none;
-  font: normal 75px/0 "knewave", Helvetica, sans-serif;
-  color: #ffffff;
-  text-align: center;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  text-shadow: 4px 4px 6px rgba(0,0,0,0.5) ;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border: none;
+    font: normal 75px/0 "knewave", Helvetica, sans-serif;
+    color: #ffffff;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
-.col-centered{
+.col-centered {
     float: none;
     margin: 0 auto;
 }

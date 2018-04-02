@@ -1,62 +1,62 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Event Page</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Event Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-	<nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" th:href="@{/home}">LogoHere</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a th:href="@{/home}">Home</a></li>
-      <li><a th:href="@{/host}">Host</a></li>
-      <li><a th:href="@{/find}">Find</a></li>
-    </ul>
-    
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/home}">LogoHere</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/home}">Home</a></li>
+            <li><a th:href="@{/host}">Host</a></li>
+            <li><a th:href="@{/find}">Find</a></li>
+        </ul>
+
         <ul class="nav navbar-nav navbar-right">
-      <li><span class="navbar-text" th:utext="${userName}"></span></li>
-		<li><p class="navbar-text">   |  </p></li>
+            <li><span class="navbar-text" th:utext="${userName}"></span></li>
+            <li><p class="navbar-text"> | </p></li>
             <li><a th:href="@{/logout}">Logout</a></li>
-    </ul>
-  </div>
+        </ul>
+    </div>
 </nav>
 
 
 <h1><span th:utext="${eventTitle}"></span></h1>
-<br />
+<br/>
 <h3><span th:utext="${eventContent}"></span></h3>
-<br />
-<br />
+<br/>
+<br/>
 <span th:utext="${eventDate}"></span>
-<br />
+<br/>
 
-    
-    <form action="#" th:action="'/charge/'+${event.id}" method="POST" id="checkout-form">
-    <input type='hidden' th:value='${eventPrice+30}' name='amount' />
-    <label>Price (+30 cent fee):<span th:text='${eventPrice+30}' /></label>
+
+<form action="#" th:action="'/charge/'+${event.id}" method="POST" id="checkout-form">
+    <input type='hidden' th:value='${eventPrice+30}' name='amount'/>
+    <label>Price (+30 cent fee):<span th:text='${eventPrice+30}'/></label>
     <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
     <script
-       src='https://checkout.stripe.com/checkout.js'
-       class='stripe-button'
-       th:attr='data-key=${stripePublicKey}, 
+            src='https://checkout.stripe.com/checkout.js'
+            class='stripe-button'
+            th:attr='data-key=${stripePublicKey},
        data-amount=${eventPrice+30}, 
        data-currency=${currency},data-email=${userEmail}'
-       data-name='Ticket Shop'
-       data-bitcoin=true
-       data-description='Spring test checkout'
-       data-image='http://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'
-       data-locale='auto'
-       data-zip-code='false'>
-   </script>
+            data-name='Ticket Shop'
+            data-bitcoin=true
+            data-description='Spring test checkout'
+            data-image='http://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'
+            data-locale='auto'
+            data-zip-code='false'>
+    </script>
 </form>
 </body>
 </html>

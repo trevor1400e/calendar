@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository("slackUserRepository")
 interface SlackUserRepository extends JpaRepository<SlackUser, Long> {
     SlackUser findByEmail(String email);
+
     SlackUser findById(int id);
 }

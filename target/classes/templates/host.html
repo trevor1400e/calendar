@@ -1,43 +1,34 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Host Page</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/host.css}" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Host Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/host.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-	<nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" th:href="@{/home}">LogoHere</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a th:href="@{/home}">Home</a></li>
-      <li  class="active"><a th:href="@{/host}">Host</a></li>
-      <li><a th:href="@{/find}">Find</a></li>
-    </ul>
-    
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/home}">LogoHere</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/home}">Home</a></li>
+            <li class="active"><a th:href="@{/host}">Host</a></li>
+            <li><a th:href="@{/find}">Find</a></li>
+        </ul>
+
         <ul class="nav navbar-nav navbar-right">
-      <li><span class="navbar-text" th:utext="${userName}"></span></li>
-		<li><p class="navbar-text">   |  </p></li>
+            <li><span class="navbar-text" th:utext="${userName}"></span></li>
+            <li><p class="navbar-text"> | </p></li>
             <li><a th:href="@{/logout}">Logout</a></li>
-    </ul>
-  </div>
+        </ul>
+    </div>
 </nav>
-
-
-
-
-
-
-
-
-
 
 
 <div class="col-sm-12 text-center"><h1>Host an Event!</h1></div>
@@ -47,54 +38,54 @@
 <br/>
 
 <div class="inner contact">
-                <!-- Form Area -->
-                <div class="contact-form">
-                    <!-- Form -->
-                    <form autocomplete="off" action="#" th:action="@{/host}" th:object="${event}" method="POST" class="form-horizontal" role="form">
-                        <!-- Left Inputs -->
-                        <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
-                            <!-- Name -->
-                            <input type="text" name="title" id="title" th:field="*{title}" required="required" class="form" placeholder="Event Title" />
-                            <br />
-                            <br />
-                            
-                            <!-- Email -->
-                            <input type="text" name="date" id="date" required="required" th:field="*{date}" class="form" placeholder="Date (MM/DD/YYYY)" />
-                            <br />
-                            <br />
-                            <!-- Subject -->
-                            <input type="text" name="price" id="price" th:field="*{price}" required="required" class="form" placeholder="Price" />
-                        </div><!-- End Left Inputs -->
-                        <!-- Right Inputs -->
-                        <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
-                            <!-- Message -->
-                            <textarea name="desc" id="desc" class="form textarea" th:field="*{content}" placeholder="Description"></textarea>
-                        </div><!-- End Right Inputs -->
-                        <!-- Bottom Submit -->
-                        <div class="relative fullwidth col-xs-12">
-                            <!-- Send Button -->
-                            <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button> 
-                             <span th:utext="${successMessage}"></span>
-                        </div><!-- End Bottom Submit -->
-                        <!-- Clear -->
-                        <div class="clear"></div>
-                    </form>
+    <!-- Form Area -->
+    <div class="contact-form">
+        <!-- Form -->
+        <form autocomplete="off" action="#" th:action="@{/host}" th:object="${event}" method="POST"
+              class="form-horizontal" role="form">
+            <!-- Left Inputs -->
+            <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
+                <!-- Name -->
+                <input type="text" name="title" id="title" th:field="*{title}" required="required" class="form"
+                       placeholder="Event Title"/>
+                <br/>
+                <br/>
 
-                    <!-- Your Mail Message -->
-                    <div class="mail-message-area">
-                        <!-- Message -->
-                        <div class="alert gray-bg mail-message not-visible-message">
-                            <strong>Thank You !</strong> Your email has been delivered.
-                        </div>
-                    </div>
+                <!-- Email -->
+                <input type="text" name="date" id="date" required="required" th:field="*{date}" class="form"
+                       placeholder="Date (MM/DD/YYYY)"/>
+                <br/>
+                <br/>
+                <!-- Subject -->
+                <input type="text" name="price" id="price" th:field="*{price}" required="required" class="form"
+                       placeholder="Price"/>
+            </div><!-- End Left Inputs -->
+            <!-- Right Inputs -->
+            <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
+                <!-- Message -->
+                <textarea name="desc" id="desc" class="form textarea" th:field="*{content}"
+                          placeholder="Description"></textarea>
+            </div><!-- End Right Inputs -->
+            <!-- Bottom Submit -->
+            <div class="relative fullwidth col-xs-12">
+                <!-- Send Button -->
+                <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button>
+                <span th:utext="${successMessage}"></span>
+            </div><!-- End Bottom Submit -->
+            <!-- Clear -->
+            <div class="clear"></div>
+        </form>
 
-                </div><!-- End Contact Form Area -->
-            </div><!-- End Inner -->
+        <!-- Your Mail Message -->
+        <div class="mail-message-area">
+            <!-- Message -->
+            <div class="alert gray-bg mail-message not-visible-message">
+                <strong>Thank You !</strong> Your email has been delivered.
+            </div>
+        </div>
 
-
-
-
-
+    </div><!-- End Contact Form Area -->
+</div><!-- End Inner -->
 
 
 </body>

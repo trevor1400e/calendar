@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'/>
+    <title>Calendar Page</title>
+    <!--<link rel="stylesheet" type="text/css" th:href="@{/css/host.css}" />-->
+    <link th:href="@{/css/fullcalendar.min.css}" rel='stylesheet'/>
+    <link th:href="@{/css/fullcalendar.print.min.css}" rel='stylesheet' media='print'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <script th:src="@{/js/moment.min.js}"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/fullcalendar.min.js}"></script>
+    <script th:inline="javascript">
+
+        $(document).ready(function () {
+
+            /*<![CDATA[*/
+
+            var teamColor;
+
+            var billy = [[${events}]].map(function (event) {
+                return {start: event.date, title: event.title, id: event.id, color: event.team.teamcolor}
+            });
+
+
+            $('#calendar').fullCalendar({
+                dayClick: function (date, jsEvent, view, resourceObj) {
+
+                    window.location.href = window.location.origin + '/calendar/' + date.format("MM-DD-YYYY") + '/edit';
+
+                },
+                eventClick: function (calEvent, jsEvent, view) {
+                    window.location.href = window.location.origin + '/calendar' + '/view/' + calEvent.id;
+                },
+
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                defaultDate: moment().format('MM-DD-YYYY'),
+                navLinks: true, // can click day/week names to navigate views
+                editable: false,
+                eventLimit: true, // allow "more" link when too many events
+                nextDayThreshold: '00:00:00', // 9am
+                events: billy
+                /*]]>*/
+
+
+            });
+
+        });
+
+    </script>
+    <style>
+
+        body {
+            background: radial-gradient(closest-side, rgba(255, 255, 255, 1) 0, rgba(255, 255, 255, 1) 9%, rgba(255, 255, 255, 1) 31%, rgba(237, 237, 237, 1) 68%, #e2e2e2 100%);
+            height: 100%;
+            padding: 0;
+            font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+            font-size: 14px;
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{|/calendar/${Date}|}">CenturyLink</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a th:href="@{|/calendar/${Date}|}">Calendar</a></li>
+            <!--<li><a th:href="@{/pair}">Pairing Board</a></li>-->
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><span class="navbar-text" th:utext="${userName}"></span></li>
+            <li><p class="navbar-text"> | </p></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div id='calendar' style='background: white; padding: 30px; border-radius: 25px'>
+    <br/>
+    <div class="col-12">
+        <h4 style="margin: auto">Show only team: </h4>
+        <select id="theTeam">
+            <option th:each="operator : ${teams}" th:value="${operator.teamname}" th:text="${operator.teamname}"></option>
+        </select>
+        <input type="button" id="change" value="Go" onclick="teamUrl()"/> <a href="/team/add"> Add Team</a>
+    </div>
+</div>
+<script>
+    function teamUrl() {
+        window.location.href = window.location.origin + '/calendar/' + moment().format('MM-DD-YYYY') +'?team='+ document.getElementById("theTeam").value;
+    }
+</script>
+</body>
+</html>

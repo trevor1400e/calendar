@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Host Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/host.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/calender.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/home}">LogoHere</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a th:href="@{|/calender/${Date}|}">Calender</a></li>
+            <li><a th:href="@{/pair}">Pairing Board</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><span class="navbar-text" th:utext="${userName}"></span></li>
+            <li><p class="navbar-text"> | </p></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="col-sm-12 text-center"><h1>Host an Event!</h1></div>
+
+
+<main>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="toolbar">
+        <div class="toggle">
+            <div class="toggle__option">week</div>
+            <div class="toggle__option toggle__option--selected">month</div>
+        </div>
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" onclick="beforeUrl()"></span>
+        <div class="current-month" th:text="${month+' '+year}"></div>
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" onclick="afterUrl()"></span>
+        <div class="search-input">
+            <input type="text" value="What are you looking for?">
+            <i class="fa fa-search"></i>
+        </div>
+    </div>
+    <div class="calendar">
+        <div class="calendar__header">
+            <div>sun</div>
+            <div>mon</div>
+            <div>tue</div>
+            <div>wed</div>
+            <div>thu</div>
+            <div>fri</div>
+            <div>sat</div>
+        </div>
+        <div class="calendar__week"
+        ">
+        <div th:each="i : ${#numbers.sequence(1, daysToAdd/1)}">
+            <div class="calendar__day day"></div>
+        </div>
+        <div th:each="i : ${#numbers.sequence(1, daysLeft/1)}">
+            <div class="calendar__day day" th:text="${i}"></div>
+        </div>
+    </div>
+    <div class="calendar__week">
+        <div class="calendar__day day">8</div>
+        <div class="calendar__day day">9</div>
+        <div class="calendar__day day">10</div>
+        <div class="calendar__day day">11</div>
+        <div class="calendar__day day">12</div>
+        <div class="calendar__day day">13</div>
+        <div class="calendar__day day">14</div>
+    </div>
+    <div class="calendar__week">
+        <div class="calendar__day day">15</div>
+        <div class="calendar__day day">16</div>
+        <div class="calendar__day day">17</div>
+        <div class="calendar__day day">18</div>
+        <div class="calendar__day day">19</div>
+        <div class="calendar__day day">20</div>
+        <div class="calendar__day day">21</div>
+    </div>
+    <div class="calendar__week">
+        <div class="calendar__day day">22</div>
+        <div class="calendar__day day">23</div>
+        <div class="calendar__day day">24</div>
+        <div class="calendar__day day">25</div>
+        <div class="calendar__day day">26</div>
+        <div class="calendar__day day">27</div>
+        <div class="calendar__day day">28</div>
+    </div>
+    <div class="calendar__week">
+        <div class="calendar__day day">29</div>
+        <div class="calendar__day day">30</div>
+        <div class="calendar__day day">31</div>
+        <div class="calendar__day day">1</div>
+        <div class="calendar__day day">2</div>
+        <div class="calendar__day day">3</div>
+        <div class="calendar__day day">4</div>
+    </div>
+    </div>
+</main>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    var monthnum = [[${monthNum}]];
+    var curYear = [[${year}]];
+
+
+    function beforeUrl() {
+        var monthBefore = monthnum - 1;
+        if (monthBefore < 1) {
+            monthBefore = 12;
+            curYear--;
+        }
+        if (monthBefore < 10) {
+            monthBefore = "0" + monthBefore;
+        }
+
+        window.location.href = "/calender/" + monthBefore + "-" + [[${day}]] + "-" + curYear;
+    }
+
+    function afterUrl() {
+        var monthAfter = monthnum + 1;
+        if (monthAfter > 12) {
+            monthAfter = 1;
+            curYear++;
+        }
+        if (monthAfter < 10) {
+            monthAfter = "0" + monthAfter;
+        }
+        window.location.href = "/calender/" + monthAfter + "-" + [[${day}]] + "-" + curYear;
+    }
+
+    /*]]>*/
+</script>
+
+
+</body>
+</html>
