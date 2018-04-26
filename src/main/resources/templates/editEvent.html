@@ -60,63 +60,78 @@
                     </div><!-- End Left Inputs -->
                     <!-- Right Inputs -->
                     <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
-
                         <br/>
-                        <select class="form-control" name="teamm8" id="dropOperator">
+                        <select class="form-control col-xs-12" name="teamm8" id="dropOperator">
                             <option th:each="operator : ${teams}" th:value="${operator.teamname}" th:text="${operator.teamname}"></option>
                         </select>
-                        <br/>
-
-                    </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="interval" >
-                                time:
-                            </label>
-                        </div>
-
-
-
-                        <div class='col-sm-3'>
-                            <div class="form-group" >
-                                <div class='input-group date' id="datetimepicker1" >
-                                    <input type="text" class="form-control" name="datem8"  placeholder="Select Date"  />
-                                    <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar "></span>
-                </span>
-                                </div>
+                        <label>
+                            Time:
+                            <input type="checkbox" id="interval"/>
+                            Multiple Days:
+                            <input type="checkbox" id="multiday"/>
+                        </label>
+                        <div class="form-group" style="margin: 0px" >
+                            <div class='input-group date col-xs-6' id="datetimepicker1" style="display: inline-table">
+                                <input type="text" class="form-control" name="datem8"  placeholder="Select Start Date" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar "></span>
+                                    </span>
+                            </div>
+                            <div class='input-group date col-xs-5 hidden' id="datetimepicker2" style="display: inline-table">
+                                <input type="text" class="form-control" name="datem82"  placeholder="Select End Date" />
+                                <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar "></span>
+                                        </span>
                             </div>
                         </div>
+                    </div>
 
-
-                        <script th:inline="javascript">
-                            // by default I set the  inputfield format to 'DD/MM/YYYY'
-                            $(function () {
-                                $('#datetimepicker1').datetimepicker({
-                                    allowInputToggle: true,
-                                    format: 'YYYY/MM/DD'
-                                });
+                    <script>
+                        // by default I set the  inputfield format to 'DD/MM/YYYY'
+                        $(function () {
+                            $('#datetimepicker1').datetimepicker({
+                                allowInputToggle: true,
+                                format: 'YYYY/MM/DD'
                             });
-                            /*<![CDATA[*/
-                            // I changed format of the inputfield as the checkbox state changes
-                            $("#interval").change(function () {
-
-                                if($(this).prop("checked") == true){
-
-                                    $('#datetimepicker1').data("DateTimePicker").format("YYYY/MM/DD hh:mm A").sideBySide(true).defaultDate([[${event.date}]]);
-                                } else {
-                                    $('#datetimepicker1').data("DateTimePicker").format("YYYY/MM/DD").defaultDate([[${event.date}]]);
-
-                                }
-                                /*]]>*/
+                            $('#datetimepicker2').datetimepicker({
+                                allowInputToggle: true,
+                                format: 'YYYY/MM/DD'
                             });
+                        });
+
+                        // I changed format of the inputfield as the checkbox state changes
+                        $("#interval").change(function () {
+
+                            if($(this).prop("checked") == true){
+
+                                $('#datetimepicker1').data("DateTimePicker").format("YYYY/MM/DD hh:mm A").sideBySide(true);
+                                $('#datetimepicker2').data("DateTimePicker").format("YYYY/MM/DD hh:mm A").sideBySide(true);
+                            } else {
+                                $('#datetimepicker1').data("DateTimePicker").format("YYYY/MM/DD");
+                                $('#datetimepicker2').data("DateTimePicker").format("YYYY/MM/DD");
+
+                            }
+
+                        });
+
+                        $("#multiday").change(function () {
+
+                            if($(this).prop("checked") == true){
+
+                                $('#datetimepicker2').removeClass("hidden");
+                            } else {
+                                $('#datetimepicker2').addClass("hidden");
+                            }
+                        });
 
                         </script>
+                        <br/>
                         <br/>
                         <br/>
                     <!-- End Right Inputs -->
                     <!-- Bottom Submit -->
                     <div class="relative fullwidth col-xs-12">
+                        <br/>
                         <!-- Send Button -->
                         <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button>
                         <span th:utext="${successMessage}"></span>
@@ -125,13 +140,7 @@
                     <div class="clear"></div>
                 </form>
 
-                <!-- Your Mail Message -->
-                <div class="mail-message-area">
-                    <!-- Message -->
-                    <div class="alert gray-bg mail-message not-visible-message">
-                        <strong>Thank You !</strong> Your email has been delivered.
-                    </div>
-                </div>
+
 
             </div><!-- End Contact Form Area -->
         </div><!-- End Inner -->

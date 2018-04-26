@@ -13,6 +13,8 @@ public class Event {
     private String title;
     @Column(name = "date")
     private String date;
+    @Column(name = "enddate")
+    private String enddate;
     @ManyToOne
     private Team team;
     @Column(name = "name")
@@ -76,6 +78,14 @@ public class Event {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
     }
 
 }

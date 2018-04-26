@@ -52,6 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/slack").permitAll()
                 .antMatchers("/registration").permitAll()
+                .regexMatchers("/calendar/\\d{2}-\\d{2}-\\d{4}/\\?team=lunch").permitAll()
                 .antMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
