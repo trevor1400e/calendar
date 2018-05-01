@@ -22,11 +22,11 @@
             var teamColor;
 
             var billy = [[${events}]].map(function (event) {
-                //TODO: if event.enddate is not null, then return dates with enddate
+                console.log(event)
                 if(event.enddate != "" && event.enddate != null){
-                    return {start: event.date, title: event.title, id: event.id, color: event.team.teamcolor, end: event.enddate}
+                    return {start: event.date, title: event.title, id: event.id, end: event.enddate}
                 }else {
-                    return {start: event.date, title: event.title, id: event.id, color: event.team.teamcolor}
+                    return {start: event.date, title: event.title, id: event.id}
                 }
             });
 

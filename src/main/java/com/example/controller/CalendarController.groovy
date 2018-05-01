@@ -72,7 +72,7 @@ class CalendarController {
         int yearNum = Integer.parseInt(year)
 
         if (team != null) {
-            events = eventRepository.findByTeamTeamname(team)
+            events = eventRepository.findByTeam(team)
         } else {
             events = eventRepository.findAll()
         }
@@ -80,7 +80,7 @@ class CalendarController {
 
         println(events)
 
-        events.each {e -> e.team.events = []}
+        events.each {e -> e.teams.each {t -> t.events = []}}
 
         modelAndView.addObject("userName", username)
         modelAndView.addObject("team", team)
@@ -144,6 +144,10 @@ class CalendarController {
         String userEmail = "null"
         Map<String, String> map = auth.principal
 
+        String[] teams = teamName.split(",")
+
+
+
         for (Map.Entry<String, String> userInfo : map.entrySet()) {
             if (userInfo.getKey() == "name") {
                 username = userInfo.getValue()
@@ -187,10 +191,12 @@ class CalendarController {
             event.setDate(reformattedDate2)
             event.setEnddate(reformattedDate3)
             event.title = event.title
-            def team = teamRepository.findByteamname(teamName)
-            event = eventRepository.save(event);
-            team.addEvent(event);
-            teamRepository.save(team)
+            for(String t : teams){
+                def team = teamRepository.findByteamname(t)
+                team.addEvent(event);
+                event = eventRepository.save(event);
+                teamRepository.save(team)
+            }
             modelAndView.addObject("successMessage", "Event has been registered successfully");
             //modelAndView.addObject("event", new Event());
             modelAndView.addObject("event", event);

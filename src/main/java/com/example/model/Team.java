@@ -18,7 +18,10 @@ public class Team {
     @Column(name = "teamcolor")
     private String teamcolor;
     @JsonIgnore
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "posts_teams",
+            joinColumns = { @JoinColumn(name = "teams_id") },
+            inverseJoinColumns = { @JoinColumn(name = "events_post_id") })
     private List<Event> events = new ArrayList<>();
 
     public int getId() {
@@ -55,12 +58,12 @@ public class Team {
 
     public void addEvent(Event event) {
         events.add(event);
-        event.setTeam(this);
+        event.addTeam(this);
     }
 
     public void removeEvent(Event event) {
         events.removeIf((e) -> e.getId() == event.getId());
-        event.setTeam(null);
+        event.setTeams(null);
     }
 
 }

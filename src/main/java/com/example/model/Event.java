@@ -1,6 +1,10 @@
 package com.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -15,8 +19,9 @@ public class Event {
     private String date;
     @Column(name = "enddate")
     private String enddate;
-    @ManyToOne
-    private Team team;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "events", cascade = CascadeType.ALL)
+    private List<Team> teams = new ArrayList<>();
     @Column(name = "name")
     private String name;
     @Column(name = "email")
@@ -32,12 +37,16 @@ public class Event {
         this.id = id;
     }
 
-    public Team getTeam() {
-        return team;
+    public List<Team> getTeams() {
+        return teams;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void addTeam(Team team){
+        teams.add(team);
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
     public String getName() {

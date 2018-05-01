@@ -65,9 +65,62 @@
                     <!-- Right Inputs -->
                     <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
                         <br/>
-                        <select class="form-control col-xs-12" name="teamm8" id="dropOperator">
-                            <option th:each="operator : ${teams}" th:value="${operator.teamname}" th:text="${operator.teamname}"></option>
-                        </select>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="button-group">
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" >
+                                                <li th:each="operator : ${teams}" >
+                                                    <a href="#" class="small" th:id="${operator.teamname}" tabIndex="-1" ><input type="checkbox" th:text="${'&nbsp;'+operator.teamname}"/></a>
+                                                </li>
+
+
+                                            <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 2</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script th:inline="javascript">
+                            /*<![CDATA[*/
+                            var options = [];
+
+                            $( '.dropdown-menu a' ).on( 'click', function( event ) {
+
+                                var $target = $( event.currentTarget ),
+                                    val = this.id,
+                                    $inp = $target.find( 'input' ),
+                                    idx;
+
+                                // if($inp.prop('checked', true)){
+                                //     console.log(this.innerText)
+                                //     console.log(this.id)
+                                //     setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+                                // }
+
+
+                                if ( ( idx = options.indexOf( val ) ) > -1 ) {
+                                    options.splice( idx, 1 );
+                                    setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+                                } else {
+                                    options.push( val );
+                                    setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+                                }
+
+                                $( event.target ).blur();
+                                console.log(options)
+                                document.getElementById("changeme").value = options;
+                                return false;
+                            });
+                            /*]]>*/
+                        </script>
+
+                        <input id="changeme" type="hidden" name="teamm8"/>
+
+                        <!--<select class="form-control col-xs-12" name="teamm8" id="dropOperator">-->
+                            <!--<option value="options"></option>-->
+                        <!--</select>-->
                         <label>
                         Time:
                             <input type="checkbox" id="interval"/>
