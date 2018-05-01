@@ -39,7 +39,7 @@
 
 <div class="panel panel-primary" style="margin: 0 auto; width: 80%;">
     <!-- Default panel contents -->
-    <div class="panel-heading" th:style="${'background: ' + event.team.teamcolor}"><h4>Edit Event: "<span th:text="${event.title}"></span>"</h4></div>
+    <div class="panel-heading" th:style="'background: ' + (${hasTeams} ? '#808000' : ${event.teams[0].teamcolor})"><h4>Edit Event: "<span th:text="${event.title}"></span>"</h4></div>
     <div class="panel-body">
         <div class="inner contact">
             <!-- Form Area -->
@@ -61,24 +61,68 @@
                     <!-- Right Inputs -->
                     <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
                         <br/>
-                        <select class="form-control col-xs-12" name="teamm8" id="dropOperator">
-                            <option th:each="operator : ${teams}" th:value="${operator.teamname}" th:text="${operator.teamname}"></option>
-                        </select>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="button-group">
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle col-sm-6" data-toggle="dropdown"><span class="glyphicon glyphicon-user"> Team</span> <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" >
+                                            <li th:each="operator : ${teams}" >
+                                                <a href="#" class="small" th:id="${operator.teamname}" tabIndex="999" ><input type="checkbox" th:text="${'&nbsp;'+operator.teamname}"/></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <script>
+
+
+                            var options = [];
+
+                            $( '.dropdown-menu a' ).on( 'click', function( event ) {
+
+                                var $target = $( event.currentTarget ),
+                                    val = this.id,
+                                    $inp = $target.find( 'input' ),
+                                    idx;
+
+                                // if($inp.prop('checked', true)){
+                                //     console.log(this.innerText)
+                                //     console.log(this.id)
+                                //     setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+                                // }
+
+
+                                if ( ( idx = options.indexOf( val ) ) > -1 ) {
+                                    options.splice( idx, 1 );
+                                    setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+                                } else {
+                                    options.push( val );
+                                    setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+                                }
+
+                                $( event.target ).blur();
+                                console.log(options)
+                                document.getElementById("changeme").value = options;
+                                return false;
+                            });
+                        </script>
+
+                        <input id="changeme" type="hidden" name="teamm8"/>
                         <label>
                             Time:
-                            <input type="checkbox" id="interval"/>
+                            <input type="checkbox" id="interval" style="z-index: 5"/>
                             Multiple Days:
-                            <input type="checkbox" id="multiday"/>
+                            <input type="checkbox" id="multiday" style="z-index: 5"/>
                         </label>
                         <div class="form-group" style="margin: 0px" >
                             <div class='input-group date col-xs-6' id="datetimepicker1" style="display: inline-table">
-                                <input type="text" class="form-control" name="datem8"  placeholder="Select Start Date" />
+                                <input type="text" class="form-control" name="datem8" th:value="${event.date}" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar "></span>
                                     </span>
                             </div>
                             <div class='input-group date col-xs-5 hidden' id="datetimepicker2" style="display: inline-table">
-                                <input type="text" class="form-control" name="datem82"  placeholder="Select End Date" />
+                                <input type="text" class="form-control" name="datem82"  th:value="${event.enddate}" />
                                 <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar "></span>
                                         </span>
@@ -86,16 +130,32 @@
                         </div>
                     </div>
 
-                    <script>
+                    <script th:inline="javascript">
                         // by default I set the  inputfield format to 'DD/MM/YYYY'
+
+                        /*<![CDATA[*/
+                        if([[${hasEndDate}]]){
+                            $('#datetimepicker2').removeClass("hidden");
+                            $('#multiday').prop('checked', true)
+                        }
+
+                        var timeFormat;
+
+
+                        timeFormat =[[${hasTime}]] ? "YYYY/MM/DD hh:mm A" : "YYYY/MM/DD"
+
+                        if([[${hasTime}]]){
+                            $('#interval').prop('checked', true)
+                        }
+
                         $(function () {
                             $('#datetimepicker1').datetimepicker({
                                 allowInputToggle: true,
-                                format: 'YYYY/MM/DD'
+                                format: timeFormat
                             });
                             $('#datetimepicker2').datetimepicker({
                                 allowInputToggle: true,
-                                format: 'YYYY/MM/DD'
+                                format: timeFormat
                             });
                         });
 
@@ -123,7 +183,7 @@
                                 $('#datetimepicker2').addClass("hidden");
                             }
                         });
-
+                        /*]]>*/
                         </script>
                         <br/>
                         <br/>

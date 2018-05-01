@@ -218,6 +218,9 @@ class CalendarController {
         String username = "null"
         Map<String, String> map = auth.principal
 
+        boolean hasEndDate;
+        boolean hasTime
+
         Map.Entry<String, String> entry = map.entrySet().iterator().next();
         String key = entry.getKey()
         String slackName = entry.getValue()
@@ -229,6 +232,10 @@ class CalendarController {
         Event event = eventRepository.findById(eventId)
         String eventDate = event.date
 
+        hasEndDate = (event.enddate!=null)
+        hasTime = event.date.contains("T")
+
+
         modelAndView.addObject("event", event)
         modelAndView.addObject("teams", teams);
         modelAndView.addObject("eventDate", eventDate)
@@ -236,6 +243,8 @@ class CalendarController {
         //modelAndView.addObject("events", events)
         modelAndView.addObject("eventId", eventId)
         modelAndView.addObject("curDate", timeStamp)
+        modelAndView.addObject("hasEndDate", hasEndDate)
+        modelAndView.addObject("hasTime", hasTime)
 
 
 
@@ -251,6 +260,8 @@ class CalendarController {
         String username = "null"
         String userEmail = "null"
         Map<String, String> map = auth.principal
+
+        String[] teams = teamName.split(",")
 
         for (Map.Entry<String, String> userInfo : map.entrySet()) {
             if (userInfo.getKey() == "name") {
@@ -292,10 +303,12 @@ class CalendarController {
             event.title = event.title
             event.date = reformattedDate2
             event.enddate = reformattedDate3
-            def team = teamRepository.findByteamname(teamName)
-            event = eventRepository.save(event)
-            team.addEvent(event);
-            teamRepository.save(team)
+            for(String t : teams){
+                def team = teamRepository.findByteamname(t)
+                team.addEvent(event);
+                event = eventRepository.save(event);
+                teamRepository.save(team)
+            }
             modelAndView.addObject("successMessage", "Event has been edited successfully");
             //modelAndView.addObject("event", new Event());
             modelAndView.addObject("event", event);
@@ -316,6 +329,10 @@ class CalendarController {
         String username = "null"
         Map<String, String> map = auth.principal
 
+        Boolean hasTeams;
+        String teamnames
+        Boolean hasend = false;
+
         Map.Entry<String, String> entry = map.entrySet().iterator().next();
         String key = entry.getKey()
         String slackName = entry.getValue()
@@ -324,6 +341,20 @@ class CalendarController {
         String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
 
         Event event = eventRepository.findById(eventId)
+        hasTeams = event.teams.size() > 1
+
+        if(hasTeams){
+//            event.teams.each {t ->
+//                teamnames += t.teamname + ", "}
+            teamnames = event.teams.collect({Team t -> t.teamname}).join(', ')
+        }else{
+            teamnames = event.teams[0].teamname
+        }
+
+        if(event.enddate != null){
+            hasend = true
+        }
+
         /*
         String[] dateArray = date.split("-")
         String month = dateArray[0]
@@ -339,6 +370,9 @@ class CalendarController {
         modelAndView.addObject("userName", username)
         //modelAndView.addObject("events", events)
         modelAndView.addObject("curDate", timeStamp)
+        modelAndView.addObject("hasTeams", hasTeams)
+        modelAndView.addObject("teamnames", teamnames)
+        modelAndView.addObject("hasend", hasend)
 
 
 
