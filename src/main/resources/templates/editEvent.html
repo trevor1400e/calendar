@@ -67,16 +67,29 @@
                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle col-sm-6" data-toggle="dropdown"><span class="glyphicon glyphicon-user"> Team</span> <span class="caret"></span></button>
                                         <ul class="dropdown-menu" >
                                             <li th:each="operator : ${teams}" >
-                                                <a href="#" class="small" th:id="${operator.teamname}" tabIndex="999" ><input type="checkbox" th:text="${'&nbsp;'+operator.teamname}"/></a>
+                                                <a href="#" class="small" th:id="${operator.teamname}" tabIndex="999" ><input type="checkbox" th:class="${operator.teamname}" th:text="${'&nbsp;'+operator.teamname}"/></a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                        <script>
-
-
+                        <input id="changeme" type="hidden" name="teamm8"/>
+                        <script th:inline="javascript">
+                            /*<![CDATA[*/
+                            var theTeamNames = [[${teamNames}]]
+                            //'[blueguy]'
+                            console.log(theTeamNames)
                             var options = [];
+                            theTeamNames.forEach(checkTeams)
+                            /*]]>*/
+                            function checkTeams(item, index){
+                                $("."+item).prop('checked', true)
+                                options.push(item);
+                                console.log(item)
+                            }
+                            document.getElementById("changeme").value = options;
+
+
 
                             $( '.dropdown-menu a' ).on( 'click', function( event ) {
 
@@ -107,7 +120,6 @@
                             });
                         </script>
 
-                        <input id="changeme" type="hidden" name="teamm8"/>
                         <label>
                             Time:
                             <input type="checkbox" id="interval" style="z-index: 5"/>
@@ -195,6 +207,13 @@
                         <!-- Send Button -->
                         <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button>
                         <span th:utext="${successMessage}"></span>
+                        <script th:inline="javascript">
+                            /*<![CDATA[*/
+                            if([[${successMessage}]] != null) {
+                                window.location.href = window.location.origin + '/calendar/' + moment().format('MM-DD-YYYY')
+                            }
+                            /*]]>*/
+                        </script>
                     </div><!-- End Bottom Submit -->
                     <!-- Clear -->
                     <div class="clear"></div>

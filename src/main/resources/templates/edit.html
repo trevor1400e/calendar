@@ -187,6 +187,13 @@
                     <!-- Send Button -->
                         <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button>
                         <span th:utext="${successMessage}"></span>
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        if([[${successMessage}]] != null) {
+                            window.location.href = window.location.origin + '/calendar/' + moment().format('MM-DD-YYYY')
+                        }
+                        /*]]>*/
+                    </script>
                     </div><!-- End Bottom Submit -->
                     <!-- Clear -->
                     <div class="clear"></div>

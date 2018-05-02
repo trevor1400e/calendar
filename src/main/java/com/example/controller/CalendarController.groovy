@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.ModelAndView
 
 import javax.validation.Valid
+import java.lang.reflect.Array
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -220,6 +221,7 @@ class CalendarController {
 
         boolean hasEndDate;
         boolean hasTime
+        Boolean hasTeams
 
         Map.Entry<String, String> entry = map.entrySet().iterator().next();
         String key = entry.getKey()
@@ -234,6 +236,10 @@ class CalendarController {
 
         hasEndDate = (event.enddate!=null)
         hasTime = event.date.contains("T")
+        hasTeams = event.teams.size() > 1
+
+        List<String> teamNames = []
+        event.teams.each({ Team t -> teamNames.add(t.teamname)})
 
 
         modelAndView.addObject("event", event)
@@ -245,6 +251,8 @@ class CalendarController {
         modelAndView.addObject("curDate", timeStamp)
         modelAndView.addObject("hasEndDate", hasEndDate)
         modelAndView.addObject("hasTime", hasTime)
+        modelAndView.addObject("hasTeams", hasTeams)
+        modelAndView.addObject("teamNames", teamNames)
 
 
 
@@ -344,8 +352,6 @@ class CalendarController {
         hasTeams = event.teams.size() > 1
 
         if(hasTeams){
-//            event.teams.each {t ->
-//                teamnames += t.teamname + ", "}
             teamnames = event.teams.collect({Team t -> t.teamname}).join(', ')
         }else{
             teamnames = event.teams[0].teamname

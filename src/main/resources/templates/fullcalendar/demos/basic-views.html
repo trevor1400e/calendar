@@ -23,10 +23,15 @@
 
             var billy = [[${events}]].map(function (event) {
                 console.log(event)
-                if(event.enddate != "" && event.enddate != null){
-                    return {start: event.date, title: event.title, id: event.id, end: event.enddate}
+                if(event.teams[1] != null){
+                    teamColor = '#808000'
                 }else {
-                    return {start: event.date, title: event.title, id: event.id, color: '#808000'}
+                    teamColor = event.teams[0].teamcolor
+                }
+                if(event.enddate != "" && event.enddate != null){
+                    return {start: event.date, title: event.title, id: event.id, end: event.enddate, color: teamColor}
+                }else {
+                    return {start: event.date, title: event.title, id: event.id, color: teamColor}
                 }
             });
 
