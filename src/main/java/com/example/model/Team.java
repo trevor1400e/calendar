@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "team")
@@ -22,7 +24,7 @@ public class Team {
     @JoinTable(name = "posts_teams",
             joinColumns = { @JoinColumn(name = "teams_id") },
             inverseJoinColumns = { @JoinColumn(name = "events_post_id") })
-    private List<Event> events = new ArrayList<>();
+    private Set<Event> events = new HashSet<>();
 
     public int getId() {
         return id;
@@ -48,11 +50,11 @@ public class Team {
         this.teamcolor = teamcolor;
     }
 
-    public List<Event> getEvents() {
+    public Set<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(List<Event> events) {
+    public void setEvents(Set<Event> events) {
         this.events = events;
     }
 
@@ -63,7 +65,7 @@ public class Team {
 
     public void removeEvent(Event event) {
         events.removeIf((e) -> e.getId() == event.getId());
-        event.setTeams(null);
+        event.removeTeam(this);
     }
 
 }

@@ -261,14 +261,16 @@ class CalendarController {
     }
 
     @RequestMapping(value = "/calendar/edit/{eventId}", method = RequestMethod.POST)
-    public ModelAndView posteventEdit(@PathVariable int eventId, @Valid Event event,@RequestParam(value = "datem8") String dateAndTime, @RequestParam(value = "datem82") String endDateAndTime, @RequestParam(value = "teamm8") String teamName, BindingResult bindingResult) {
+    public ModelAndView posteventEdit(@PathVariable int eventId,@Valid Event event, @RequestParam(value = "datem8") String dateAndTime, @RequestParam(value = "datem82") String endDateAndTime, @RequestParam(value = "teamm8") String teamName, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView()
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
         User userExists = userService.findUserByEmail(auth.getName());
         String username = "null"
         String userEmail = "null"
         Map<String, String> map = auth.principal
+        Event eventcheck = eventRepository.findById(eventId)
 
+        //blue,green,red
         String[] teams = teamName.split(",")
 
         for (Map.Entry<String, String> userInfo : map.entrySet()) {
@@ -304,19 +306,29 @@ class CalendarController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("editEvent");
         } else {
-            //event.setEmail(user.getEmail());
             event.id = eventId
             event.name = username
+            event.description = event.description
             event.email = userEmail
             event.title = event.title
             event.date = reformattedDate2
             event.enddate = reformattedDate3
+
+            for (Team t : teamRepository.findAll()) {
+                if (eventcheck.teams.contains(t)) {
+                    t.removeEvent(eventcheck)
+                }
+            }
+
             for(String t : teams){
                 def team = teamRepository.findByteamname(t)
-                team.addEvent(event);
+
+                team.addEvent(event)
+                //event.addTeam(team)
                 event = eventRepository.save(event);
                 teamRepository.save(team)
             }
+
             modelAndView.addObject("successMessage", "Event has been edited successfully");
             //modelAndView.addObject("event", new Event());
             modelAndView.addObject("event", event);

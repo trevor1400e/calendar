@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "posts")
@@ -21,7 +23,7 @@ public class Event {
     private String enddate;
     @JsonIgnore
     @ManyToMany(mappedBy = "events", cascade = CascadeType.ALL)
-    private List<Team> teams = new ArrayList<>();
+    private Set<Team> teams = new HashSet<>();
     @Column(name = "name")
     private String name;
     @Column(name = "email")
@@ -37,7 +39,7 @@ public class Event {
         this.id = id;
     }
 
-    public List<Team> getTeams() {
+    public Set<Team> getTeams() {
         return teams;
     }
 
@@ -45,8 +47,12 @@ public class Event {
         teams.add(team);
     }
 
-    public void setTeams(List<Team> teams) {
+    public void setTeams(Set<Team> teams) {
         this.teams = teams;
+    }
+
+    public void removeTeam(Team team){
+        this.teams.remove(team);
     }
 
     public String getName() {
