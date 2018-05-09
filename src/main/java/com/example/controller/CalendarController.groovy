@@ -60,7 +60,7 @@ class CalendarController {
         println(team)
 
         //User user = userService.findUserByEmail(auth.getName())
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
         List<Team> teams = teamRepository.findAll()
 
         String[] dateArray = date.split("-")
@@ -117,7 +117,7 @@ class CalendarController {
             }
         }
 
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
 
         Event event = new Event()
 
@@ -158,26 +158,26 @@ class CalendarController {
         }
 
         println(dateAndTime)
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
 
-        LocalDate fancyDate = LocalDate.parse(dateUpdate, DateTimeFormatter.ofPattern("MM-dd-yyyy"))
+        LocalDate fancyDate = LocalDate.parse(dateUpdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         String reformattedDate = fancyDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
         String reformattedDate2;
         String reformattedDate3;
         if (dateAndTime.length() > 11) {
-            LocalDateTime fancyDate2 = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"))
+            LocalDateTime fancyDate2 = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
             reformattedDate2 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
         }else{
-            LocalDate fancyDate2 = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+            LocalDate fancyDate2 = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             reformattedDate2 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
         if (endDateAndTime.length() > 11) {
-            LocalDateTime fancyDate2 = LocalDateTime.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"))
+            LocalDateTime fancyDate2 = LocalDateTime.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
         }else if(endDateAndTime != null && endDateAndTime != ''){
-            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("YYYY-MM-DD"))
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
@@ -228,7 +228,7 @@ class CalendarController {
         String slackName = entry.getValue()
         username = slackName
 
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
         List<Team> teams = teamRepository.findAll()
 
         Event event = eventRepository.findById(eventId)
@@ -281,24 +281,24 @@ class CalendarController {
             }
         }
 
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
 
 
         String reformattedDate2;
         String reformattedDate3;
         if (dateAndTime.length() > 11) {
-            LocalDateTime fancyDate2 = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"))
+            LocalDateTime fancyDate2 = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
             reformattedDate2 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
         }else{
-            LocalDate fancyDate2 = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+            LocalDate fancyDate2 = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             reformattedDate2 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
         if (endDateAndTime.length() > 11) {
-            LocalDateTime fancyDate2 = LocalDateTime.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"))
+            LocalDateTime fancyDate2 = LocalDateTime.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
         }else  if(endDateAndTime != null && endDateAndTime != ''){
-            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
@@ -358,7 +358,7 @@ class CalendarController {
         String slackName = entry.getValue()
         username = slackName
 
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
 
         Event event = eventRepository.findById(eventId)
         hasTeams = event.teams.size() > 1
@@ -373,16 +373,6 @@ class CalendarController {
             hasend = true
         }
 
-        /*
-        String[] dateArray = date.split("-")
-        String month = dateArray[0]
-        String day = dateArray[1]
-        String year = dateArray[2]
-
-        int monthNum = Integer.parseInt(month)
-        int dayNum = Integer.parseInt(day)
-        int yearNum = Integer.parseInt(year)
-*/
 
         modelAndView.addObject("event", event)
         modelAndView.addObject("userName", username)

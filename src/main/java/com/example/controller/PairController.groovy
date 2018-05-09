@@ -28,7 +28,7 @@ class PairController {
                 username = userInfo.getValue()
             }
         }
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime());
 
         modelAndView.addObject("Date", timeStamp)
         modelAndView.addObject("userName", username)

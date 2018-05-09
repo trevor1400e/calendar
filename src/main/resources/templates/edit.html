@@ -143,11 +143,11 @@
                             $(function () {
                                 $('#datetimepicker1').datetimepicker({
                                     allowInputToggle: true,
-                                    format: 'YYYY/MM/DD'
+                                    format: 'YYYY-MM-DD'
                                 });
                                 $('#datetimepicker2').datetimepicker({
                                     allowInputToggle: true,
-                                    format: 'YYYY/MM/DD'
+                                    format: 'YYYY-MM-DD'
                                 });
                             });
 
@@ -156,11 +156,11 @@
 
                                 if($(this).prop("checked") == true){
 
-                                    $('#datetimepicker1').data("DateTimePicker").format("YYYY/MM/DD hh:mm A").sideBySide(true);
-                                    $('#datetimepicker2').data("DateTimePicker").format("YYYY/MM/DD hh:mm A").sideBySide(true);
+                                    $('#datetimepicker1').data("DateTimePicker").format("YYYY-MM-DD hh:mm A").sideBySide(true);
+                                    $('#datetimepicker2').data("DateTimePicker").format("YYYY-MM-DD hh:mm A").sideBySide(true);
                                 } else {
-                                    $('#datetimepicker1').data("DateTimePicker").format("YYYY/MM/DD");
-                                    $('#datetimepicker2').data("DateTimePicker").format("YYYY/MM/DD");
+                                    $('#datetimepicker1').data("DateTimePicker").format("YYYY-MM-DD");
+                                    $('#datetimepicker2').data("DateTimePicker").format("YYYY-MM-DD");
 
                                 }
 
@@ -190,7 +190,7 @@
                     <script th:inline="javascript">
                         /*<![CDATA[*/
                         if([[${successMessage}]] != null) {
-                            window.location.href = window.location.origin + '/calendar/' + moment().format('MM-DD-YYYY')
+                            window.location.href = window.location.origin + '/calendar/' + moment().format('YYYY-MM-DD')
                         }
                         /*]]>*/
                     </script>
