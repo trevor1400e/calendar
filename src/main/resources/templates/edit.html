@@ -33,7 +33,7 @@
     </div>
 </nav>
 
-
+<span id="chosenDate" hidden="hidden" ></span>
 <br/>
 <br/>
 
@@ -88,12 +88,6 @@
                                     $inp = $target.find( 'input' ),
                                     idx;
 
-                                // if($inp.prop('checked', true)){
-                                //     console.log(this.innerText)
-                                //     console.log(this.id)
-                                //     setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
-                                // }
-
 
                                 if ( ( idx = options.indexOf( val ) ) > -1 ) {
                                     options.splice( idx, 1 );
@@ -124,7 +118,7 @@
                         </label>
                         <div class="form-group" style="margin: 0px" >
                                 <div class='input-group date col-xs-6' id="datetimepicker1" style="display: inline-table">
-                                    <input type="text" class="form-control" name="datem8"  placeholder="Select Start Date" />
+                                    <input type="text" class="form-control" name="datem8"  th:value="${dateUpdate}" />
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar "></span>
                                     </span>
