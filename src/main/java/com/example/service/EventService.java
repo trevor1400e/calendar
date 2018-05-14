@@ -11,4 +11,6 @@ public interface EventService {
     public List<Event> searchEventsByTitle(String title);
 
     public List<Event> findByTeam(String team);
+
+    public void removeEvent(int id);
 }

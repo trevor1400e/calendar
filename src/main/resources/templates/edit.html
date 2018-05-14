@@ -33,7 +33,7 @@
     </div>
 </nav>
 
-
+<span id="chosenDate" hidden="hidden" ></span>
 <br/>
 <br/>
 
@@ -65,18 +65,60 @@
                     <!-- Right Inputs -->
                     <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
                         <br/>
-                        <select class="form-control col-xs-12" name="teamm8" id="dropOperator">
-                            <option th:each="operator : ${teams}" th:value="${operator.teamname}" th:text="${operator.teamname}"></option>
-                        </select>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="button-group">
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle col-sm-6" data-toggle="dropdown"><span class="glyphicon glyphicon-user"> Team</span> <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" >
+                                                <li th:each="operator : ${teams}" >
+                                                    <a href="#" class="small" th:id="${operator.teamname}" tabIndex="999" ><input type="checkbox" th:text="${'&nbsp;'+operator.teamname}"/></a>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                        </div>
+                        <script th:inline="javascript">
+                            /*<![CDATA[*/
+                            var options = [];
+
+                            $( '.dropdown-menu a' ).on( 'click', function( event ) {
+
+                                var $target = $( event.currentTarget ),
+                                    val = this.id,
+                                    $inp = $target.find( 'input' ),
+                                    idx;
+
+
+                                if ( ( idx = options.indexOf( val ) ) > -1 ) {
+                                    options.splice( idx, 1 );
+                                    setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+                                } else {
+                                    options.push( val );
+                                    setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+                                }
+
+                                $( event.target ).blur();
+                                console.log(options)
+                                document.getElementById("changeme").value = options;
+                                return false;
+                            });
+                            /*]]>*/
+                        </script>
+
+                        <input id="changeme" type="hidden" name="teamm8"/>
+
+                        <!--<select class="form-control col-xs-12" name="teamm8" id="dropOperator">-->
+                            <!--<option value="options"></option>-->
+                        <!--</select>-->
                         <label>
                         Time:
-                            <input type="checkbox" id="interval"/>
+                            <input type="checkbox" id="interval" style="z-index: 5"/>
                          Multiple Days:
-                            <input type="checkbox" id="multiday"/>
+                            <input type="checkbox" id="multiday" style="z-index: 5"/>
                         </label>
                         <div class="form-group" style="margin: 0px" >
                                 <div class='input-group date col-xs-6' id="datetimepicker1" style="display: inline-table">
-                                    <input type="text" class="form-control" name="datem8"  placeholder="Select Start Date" />
+                                    <input type="text" class="form-control" name="datem8"  th:value="${dateUpdate}" />
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar "></span>
                                     </span>
@@ -95,11 +137,11 @@
                             $(function () {
                                 $('#datetimepicker1').datetimepicker({
                                     allowInputToggle: true,
-                                    format: 'YYYY/MM/DD'
+                                    format: 'YYYY-MM-DD'
                                 });
                                 $('#datetimepicker2').datetimepicker({
                                     allowInputToggle: true,
-                                    format: 'YYYY/MM/DD'
+                                    format: 'YYYY-MM-DD'
                                 });
                             });
 
@@ -108,11 +150,11 @@
 
                                 if($(this).prop("checked") == true){
 
-                                    $('#datetimepicker1').data("DateTimePicker").format("YYYY/MM/DD hh:mm A").sideBySide(true);
-                                    $('#datetimepicker2').data("DateTimePicker").format("YYYY/MM/DD hh:mm A").sideBySide(true);
+                                    $('#datetimepicker1').data("DateTimePicker").format("YYYY-MM-DD hh:mm A").sideBySide(true);
+                                    $('#datetimepicker2').data("DateTimePicker").format("YYYY-MM-DD hh:mm A").sideBySide(true);
                                 } else {
-                                    $('#datetimepicker1').data("DateTimePicker").format("YYYY/MM/DD");
-                                    $('#datetimepicker2').data("DateTimePicker").format("YYYY/MM/DD");
+                                    $('#datetimepicker1').data("DateTimePicker").format("YYYY-MM-DD");
+                                    $('#datetimepicker2').data("DateTimePicker").format("YYYY-MM-DD");
 
                                 }
 
@@ -139,6 +181,13 @@
                     <!-- Send Button -->
                         <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button>
                         <span th:utext="${successMessage}"></span>
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        if([[${successMessage}]] != null) {
+                            window.location.href = window.location.origin + '/calendar/' + moment().format('YYYY-MM-DD')
+                        }
+                        /*]]>*/
+                    </script>
                     </div><!-- End Bottom Submit -->
                     <!-- Clear -->
                     <div class="clear"></div>

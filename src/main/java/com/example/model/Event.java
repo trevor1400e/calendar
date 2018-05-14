@@ -1,6 +1,12 @@
 package com.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "posts")
@@ -15,8 +21,9 @@ public class Event {
     private String date;
     @Column(name = "enddate")
     private String enddate;
-    @ManyToOne
-    private Team team;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "events", cascade = CascadeType.ALL)
+    private Set<Team> teams = new HashSet<>();
     @Column(name = "name")
     private String name;
     @Column(name = "email")
@@ -32,12 +39,20 @@ public class Event {
         this.id = id;
     }
 
-    public Team getTeam() {
-        return team;
+    public Set<Team> getTeams() {
+        return teams;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void addTeam(Team team){
+        teams.add(team);
+    }
+
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
+    }
+
+    public void removeTeam(Team team){
+        this.teams.remove(team);
     }
 
     public String getName() {

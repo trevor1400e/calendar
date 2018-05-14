@@ -59,7 +59,7 @@ class CalendarController {
         println(team)
 
         //User user = userService.findUserByEmail(auth.getName())
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
         List<Team> teams = teamRepository.findAll()
 
         String[] dateArray = date.split("-")
@@ -72,7 +72,7 @@ class CalendarController {
         int yearNum = Integer.parseInt(year)
 
         if (team != null) {
-            events = eventRepository.findByTeamTeamname(team)
+            events = eventRepository.findByTeam(team)
         } else {
             events = eventRepository.findAll()
         }
@@ -80,7 +80,7 @@ class CalendarController {
 
         println(events)
 
-        events.each {e -> e.team.events = []}
+        events.each {e -> e.teams.each {t -> t.events = []}}
 
         modelAndView.addObject("userName", username)
         modelAndView.addObject("team", team)
@@ -116,7 +116,7 @@ class CalendarController {
             }
         }
 
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
 
         Event event = new Event()
 
@@ -144,6 +144,10 @@ class CalendarController {
         String userEmail = "null"
         Map<String, String> map = auth.principal
 
+        String[] teams = teamName.split(",")
+
+
+
         for (Map.Entry<String, String> userInfo : map.entrySet()) {
             if (userInfo.getKey() == "name") {
                 username = userInfo.getValue()
@@ -153,26 +157,26 @@ class CalendarController {
         }
 
         println(dateAndTime)
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
 
-        LocalDate fancyDate = LocalDate.parse(dateUpdate, DateTimeFormatter.ofPattern("MM-dd-yyyy"))
+        LocalDate fancyDate = LocalDate.parse(dateUpdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         String reformattedDate = fancyDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
         String reformattedDate2;
         String reformattedDate3;
         if (dateAndTime.length() > 11) {
-            LocalDateTime fancyDate2 = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"))
+            LocalDateTime fancyDate2 = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
             reformattedDate2 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
         }else{
-            LocalDate fancyDate2 = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+            LocalDate fancyDate2 = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             reformattedDate2 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
         if (endDateAndTime.length() > 11) {
-            LocalDateTime fancyDate2 = LocalDateTime.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"))
+            LocalDateTime fancyDate2 = LocalDateTime.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
         }else if(endDateAndTime != null && endDateAndTime != ''){
-            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("YYYY-MM-DD"))
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
@@ -187,10 +191,12 @@ class CalendarController {
             event.setDate(reformattedDate2)
             event.setEnddate(reformattedDate3)
             event.title = event.title
-            def team = teamRepository.findByteamname(teamName)
-            event = eventRepository.save(event);
-            team.addEvent(event);
-            teamRepository.save(team)
+            for(String t : teams){
+                def team = teamRepository.findByteamname(t)
+                team.addEvent(event);
+                event = eventRepository.save(event);
+                teamRepository.save(team)
+            }
             modelAndView.addObject("successMessage", "Event has been registered successfully");
             //modelAndView.addObject("event", new Event());
             modelAndView.addObject("event", event);
@@ -212,16 +218,28 @@ class CalendarController {
         String username = "null"
         Map<String, String> map = auth.principal
 
+        boolean hasEndDate;
+        boolean hasTime
+        Boolean hasTeams
+
         Map.Entry<String, String> entry = map.entrySet().iterator().next();
         String key = entry.getKey()
         String slackName = entry.getValue()
         username = slackName
 
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
         List<Team> teams = teamRepository.findAll()
 
         Event event = eventRepository.findById(eventId)
         String eventDate = event.date
+
+        hasEndDate = (event.enddate!=null)
+        hasTime = event.date.contains("T")
+        hasTeams = event.teams.size() > 1
+
+        List<String> teamNames = []
+        event.teams.each({ Team t -> teamNames.add(t.teamname)})
+
 
         modelAndView.addObject("event", event)
         modelAndView.addObject("teams", teams);
@@ -230,6 +248,10 @@ class CalendarController {
         //modelAndView.addObject("events", events)
         modelAndView.addObject("eventId", eventId)
         modelAndView.addObject("curDate", timeStamp)
+        modelAndView.addObject("hasEndDate", hasEndDate)
+        modelAndView.addObject("hasTime", hasTime)
+        modelAndView.addObject("hasTeams", hasTeams)
+        modelAndView.addObject("teamNames", teamNames)
 
 
 
@@ -238,13 +260,17 @@ class CalendarController {
     }
 
     @RequestMapping(value = "/calendar/edit/{eventId}", method = RequestMethod.POST)
-    public ModelAndView posteventEdit(@PathVariable int eventId, @Valid Event event,@RequestParam(value = "datem8") String dateAndTime, @RequestParam(value = "datem82") String endDateAndTime, @RequestParam(value = "teamm8") String teamName, BindingResult bindingResult) {
+    public ModelAndView posteventEdit(@PathVariable int eventId,@Valid Event event, @RequestParam(value = "datem8") String dateAndTime, @RequestParam(value = "datem82") String endDateAndTime, @RequestParam(value = "teamm8") String teamName, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView()
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
         User userExists = userService.findUserByEmail(auth.getName());
         String username = "null"
         String userEmail = "null"
         Map<String, String> map = auth.principal
+        Event eventcheck = eventRepository.findById(eventId)
+
+        //blue,green,red
+        String[] teams = teamName.split(",")
 
         for (Map.Entry<String, String> userInfo : map.entrySet()) {
             if (userInfo.getKey() == "name") {
@@ -254,24 +280,24 @@ class CalendarController {
             }
         }
 
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
 
 
         String reformattedDate2;
         String reformattedDate3;
         if (dateAndTime.length() > 11) {
-            LocalDateTime fancyDate2 = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"))
+            LocalDateTime fancyDate2 = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
             reformattedDate2 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
         }else{
-            LocalDate fancyDate2 = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+            LocalDate fancyDate2 = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             reformattedDate2 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
         if (endDateAndTime.length() > 11) {
-            LocalDateTime fancyDate2 = LocalDateTime.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"))
+            LocalDateTime fancyDate2 = LocalDateTime.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
         }else  if(endDateAndTime != null && endDateAndTime != ''){
-            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
@@ -279,17 +305,29 @@ class CalendarController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("editEvent");
         } else {
-            //event.setEmail(user.getEmail());
             event.id = eventId
             event.name = username
+            event.description = event.description
             event.email = userEmail
             event.title = event.title
             event.date = reformattedDate2
             event.enddate = reformattedDate3
-            def team = teamRepository.findByteamname(teamName)
-            event = eventRepository.save(event)
-            team.addEvent(event);
-            teamRepository.save(team)
+
+            for (Team t : teamRepository.findAll()) {
+                if (eventcheck.teams.contains(t)) {
+                    t.removeEvent(eventcheck)
+                }
+            }
+
+            for(String t : teams){
+                def team = teamRepository.findByteamname(t)
+
+                team.addEvent(event)
+                //event.addTeam(team)
+                event = eventRepository.save(event);
+                teamRepository.save(team)
+            }
+
             modelAndView.addObject("successMessage", "Event has been edited successfully");
             //modelAndView.addObject("event", new Event());
             modelAndView.addObject("event", event);
@@ -310,29 +348,38 @@ class CalendarController {
         String username = "null"
         Map<String, String> map = auth.principal
 
+        Boolean hasTeams;
+        String teamnames
+        Boolean hasend = false;
+
         Map.Entry<String, String> entry = map.entrySet().iterator().next();
         String key = entry.getKey()
         String slackName = entry.getValue()
         username = slackName
 
-        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
 
         Event event = eventRepository.findById(eventId)
-        /*
-        String[] dateArray = date.split("-")
-        String month = dateArray[0]
-        String day = dateArray[1]
-        String year = dateArray[2]
+        hasTeams = event.teams.size() > 1
 
-        int monthNum = Integer.parseInt(month)
-        int dayNum = Integer.parseInt(day)
-        int yearNum = Integer.parseInt(year)
-*/
+        if(hasTeams){
+            teamnames = event.teams.collect({Team t -> t.teamname}).join(', ')
+        }else{
+            teamnames = event.teams[0].teamname
+        }
+
+        if(event.enddate != null){
+            hasend = true
+        }
+
 
         modelAndView.addObject("event", event)
         modelAndView.addObject("userName", username)
         //modelAndView.addObject("events", events)
         modelAndView.addObject("curDate", timeStamp)
+        modelAndView.addObject("hasTeams", hasTeams)
+        modelAndView.addObject("teamnames", teamnames)
+        modelAndView.addObject("hasend", hasend)
 
 
 
@@ -340,4 +387,8 @@ class CalendarController {
         return modelAndView
     }
 
+    @RequestMapping(value = "/calendar/edit/{eventId}", method = RequestMethod.DELETE)
+    ModelAndView deleteEvent(@PathVariable int eventId){
+        eventRepository.removeEvent(eventId)
+    }
 }

@@ -22,14 +22,24 @@
             var teamColor;
 
             var billy = [[${events}]].map(function (event) {
-                return {start: event.date, title: event.title, id: event.id, color: event.team.teamcolor}
+                console.log(event);
+                if(event.teams[1] != null){
+                    teamColor = '#808000'
+                }else {
+                    teamColor = event.teams[0].teamcolor
+                }
+                if(event.enddate != null && event.enddate != ""){
+                    return {start: event.date, title: event.title, id: event.id, end: event.enddate, color: teamColor}
+                }else {
+                    return {start: event.date, title: event.title, id: event.id, color: teamColor}
+                }
             });
 
 
             $('#calendar').fullCalendar({
                 dayClick: function (date, jsEvent, view, resourceObj) {
 
-                    window.location.href = window.location.origin + '/calendar/' + date.format("MM-DD-YYYY") + '/edit';
+                    window.location.href = window.location.origin + '/calendar/' + date.format("YYYY-MM-DD") + '/edit';
 
                 },
                 eventClick: function (calEvent, jsEvent, view) {
@@ -41,7 +51,7 @@
                     center: 'title',
                     right: 'month,basicWeek,basicDay'
                 },
-                defaultDate: moment().format('MM-DD-YYYY'),
+                defaultDate: moment().format('YYYY-MM-DD'),
                 navLinks: true, // can click day/week names to navigate views
                 editable: false,
                 eventLimit: true, // allow "more" link when too many events
@@ -102,7 +112,8 @@
 </div>
 <script>
     function teamUrl() {
-        window.location.href = window.location.origin + '/calendar/' + moment().format('MM-DD-YYYY') +'?team='+ document.getElementById("theTeam").value;
+        var teamName = document.getElementById("theTeam").value;
+        window.location.href = window.location.origin + '/calendar/' + moment().format('YYYY-MM-DD') +'?team='+teamName;
     }
 </script>
 </body>
