@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.ModelAndView
 
 import javax.validation.Valid
-import java.lang.reflect.Array
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -388,4 +387,8 @@ class CalendarController {
         return modelAndView
     }
 
+    @RequestMapping(value = "/calendar/edit/{eventId}", method = RequestMethod.DELETE)
+    ModelAndView deleteEvent(@PathVariable int eventId){
+        eventRepository.removeEvent(eventId)
+    }
 }

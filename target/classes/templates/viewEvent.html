@@ -57,6 +57,10 @@
     <button onclick="editUrl()" id="submit" name="submit" class="btn btn-success" style="margin: 0 auto; width: 20%;">
         Edit
     </button>
+    <button onclick="deleteEvent()" id="delete" name="delete" class="btn btn-success" style="margin: 0 auto; width: 20%; background: red !important; border-color: red !important">
+        Delete
+    </button>
+
 </div>
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -69,9 +73,19 @@
     document.getElementById('desc').innerHTML = description;
 
     function editUrl() {
-        window.location.href = window.location.origin + '/calendar/' + 'edit/' + [[${event.id}]];
+        window.location.href = window.location.origin + '/calendar/edit/' + [[${event.id}]];
     }
 
+    function deleteEvent() {
+        $.ajax({
+            url: window.location.origin + '/calendar/edit/' + [[${event.id}]],
+            type: 'DELETE',
+            success: function(result) {
+                window.location.href = window.location.origin + '/calendar/'+[[${curDate}]];
+            }
+        });
+
+    }
     /*]]>*/
 </script>
 

@@ -28,4 +28,6 @@ public class EventServiceImpl implements EventService {
         return eventRepo.findByTeam(team);
     }
 
+    @Override
+    public void removeEvent(int id) { eventRepo.removeEvent(id);}
 }
