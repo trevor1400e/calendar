@@ -57,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/slack").failureUrl("/slack?error=true")
-                .defaultSuccessUrl("/calendar/" + new Date().format("YYYY-MM-DD"))
+                .defaultSuccessUrl("/calendar/" + new Date().format("yyyy-MM-dd"))
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()

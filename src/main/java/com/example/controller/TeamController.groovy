@@ -36,7 +36,7 @@ class TeamController {
                 username = userInfo.getValue()
             }
         }
-        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
         modelAndView.addObject("Date", timeStamp)
         modelAndView.addObject("team", team)
@@ -57,13 +57,14 @@ class TeamController {
                 username = userInfo.getValue()
             }
         }
-        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
         if (bindingResult.hasErrors()) {
             println("there was an error")
             modelAndView.setViewName("addTeam");
         } else {
             println("trying to save")
+            team.teamname = team.teamname.replaceAll("[^A-Za-z0-9]", "");
             teamRepository.save(team)
             modelAndView.addObject("successMessage", "Team created successfully!");
             modelAndView.addObject("Date", timeStamp)

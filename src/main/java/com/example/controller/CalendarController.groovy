@@ -59,7 +59,7 @@ class CalendarController {
         println(team)
 
         //User user = userService.findUserByEmail(auth.getName())
-        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
         List<Team> teams = teamRepository.findAll()
 
         String[] dateArray = date.split("-")
@@ -116,7 +116,7 @@ class CalendarController {
             }
         }
 
-        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
 
         Event event = new Event()
 
@@ -157,7 +157,7 @@ class CalendarController {
         }
 
         println(dateAndTime)
-        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
 
         LocalDate fancyDate = LocalDate.parse(dateUpdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         String reformattedDate = fancyDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
@@ -176,7 +176,7 @@ class CalendarController {
             LocalDateTime fancyDate2 = LocalDateTime.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
         }else if(endDateAndTime != null && endDateAndTime != ''){
-            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("YYYY-MM-DD"))
+            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
@@ -227,7 +227,7 @@ class CalendarController {
         String slackName = entry.getValue()
         username = slackName
 
-        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
         List<Team> teams = teamRepository.findAll()
 
         Event event = eventRepository.findById(eventId)
@@ -280,7 +280,7 @@ class CalendarController {
             }
         }
 
-        String timeStamp = new SimpleDateFormat("YYYY-MM-DD").format(Calendar.getInstance().getTime())
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
 
 
         String reformattedDate2;
