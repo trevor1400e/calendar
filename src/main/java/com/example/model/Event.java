@@ -28,6 +28,8 @@ public class Event {
     private String name;
     @Column(name = "email")
     private String email;
+    @Column(name = "isLocked")
+    private Boolean isLocked;
     @Column(name = "description")
     private String description;
 
@@ -103,4 +105,11 @@ public class Event {
         this.enddate = enddate;
     }
 
+    public Boolean getLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(Boolean locked) {
+        isLocked = locked;
+    }
 }
