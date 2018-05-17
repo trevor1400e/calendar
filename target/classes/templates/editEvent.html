@@ -125,6 +125,8 @@
                             <input type="checkbox" id="interval" style="z-index: 5"/>
                             Multiple Days:
                             <input type="checkbox" id="multiday" style="z-index: 5"/>
+                            Lock To Creator:
+                            <input type="checkbox" name="islocked" id="islocked2" value="unchecked" style="z-index: 5"/>
                         </label>
                         <div class="form-group" style="margin: 0px" >
                             <div class='input-group date col-xs-6' id="datetimepicker1" style="display: inline-table">
@@ -160,6 +162,10 @@
                             $('#interval').prop('checked', true)
                         }
 
+                        if([[${isLocked}]]){
+                            $('#islocked2').prop('checked', true)
+                        }
+
                         $(function () {
                             $('#datetimepicker1').datetimepicker({
                                 allowInputToggle: true,
@@ -193,6 +199,14 @@
                                 $('#datetimepicker2').removeClass("hidden");
                             } else {
                                 $('#datetimepicker2').addClass("hidden");
+                            }
+                        });
+
+                        $("#islocked2").change(function () {
+
+                            if($(this).prop("checked") == true){
+
+                                $('#islocked2').val("true");
                             }
                         });
                         /*]]>*/
