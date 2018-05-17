@@ -84,6 +84,7 @@ class TeamController {
         return modelAndView
     }
 
+
     @RequestMapping(value = "/team/edit/{teamId}", method = RequestMethod.GET)
     public ModelAndView editTeam(@PathVariable int teamId) {
         ModelAndView modelAndView = new ModelAndView();
