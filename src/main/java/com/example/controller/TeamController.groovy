@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.validation.BindingResult
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
@@ -71,6 +72,59 @@ class TeamController {
             modelAndView.addObject("team", team)
             modelAndView.addObject("userName", username)
             modelAndView.setViewName("addTeam")
+        }
+        return modelAndView
+    }
+
+    @RequestMapping(value = "/team/edit/{teamId}", method = RequestMethod.GET)
+    public ModelAndView editTeam(@PathVariable int teamId) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = "null"
+        Map<String, String> map = auth.principal
+        Team team = teamRepository.findById(teamId)
+
+        for (Map.Entry<String, String> userInfo : map.entrySet()) {
+            if (userInfo.getKey() == "name") {
+                username = userInfo.getValue()
+            }
+        }
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+
+        modelAndView.addObject("Date", timeStamp)
+        modelAndView.addObject("team", team)
+        modelAndView.addObject("userName", username)
+        modelAndView.setViewName("editTeam")
+        return modelAndView
+    }
+
+    @RequestMapping(value = "/team/edit", method = RequestMethod.POST)
+    public ModelAndView postEditTeam(@Valid Team team, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = "null"
+        Map<String, String> map = auth.principal
+
+        for (Map.Entry<String, String> userInfo : map.entrySet()) {
+            if (userInfo.getKey() == "name") {
+                username = userInfo.getValue()
+            }
+        }
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+
+        if (bindingResult.hasErrors()) {
+            println("there was an error")
+            modelAndView.setViewName("addTeam");
+        } else {
+            println("trying to save")
+            team.teamname = team.teamname.replaceAll("[^A-Za-z0-9]", "");
+            team.id = team.id
+            teamRepository.save(team)
+            modelAndView.addObject("successMessage", "Team created successfully!");
+            modelAndView.addObject("Date", timeStamp)
+            modelAndView.addObject("team", team)
+            modelAndView.addObject("userName", username)
+            modelAndView.setViewName("editTeam")
         }
         return modelAndView
     }

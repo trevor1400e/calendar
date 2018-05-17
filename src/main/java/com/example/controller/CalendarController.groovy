@@ -227,7 +227,8 @@ class CalendarController {
 
         boolean hasEndDate;
         boolean hasTime
-        Boolean hasTeams
+        boolean hasTeams
+        boolean isLocked
 
         Map.Entry<String, String> entry = map.entrySet().iterator().next();
         String key = entry.getKey()
@@ -247,6 +248,8 @@ class CalendarController {
         List<String> teamNames = []
         event.teams.each({ Team t -> teamNames.add(t.teamname) })
 
+        isLocked = event.getLocked()
+
 
         modelAndView.addObject("event", event)
         modelAndView.addObject("teams", teams);
@@ -259,6 +262,7 @@ class CalendarController {
         modelAndView.addObject("hasTime", hasTime)
         modelAndView.addObject("hasTeams", hasTeams)
         modelAndView.addObject("teamNames", teamNames)
+        modelAndView.addObject("isLocked", isLocked)
 
 
 
@@ -323,9 +327,9 @@ class CalendarController {
             event.description = event.description
             event.email = userEmail
             event.title = event.title
-            event.locked(islocked)
+            event.setLocked(islocked)
             if (islocked == null) {
-                event.locked(false)
+                event.setLocked(false)
             }
             event.date = reformattedDate2
             event.enddate = reformattedDate3

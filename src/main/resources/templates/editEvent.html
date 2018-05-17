@@ -162,6 +162,10 @@
                             $('#interval').prop('checked', true)
                         }
 
+                        if([[${isLocked}]]){
+                            $('#islocked2').prop('checked', true)
+                        }
+
                         $(function () {
                             $('#datetimepicker1').datetimepicker({
                                 allowInputToggle: true,

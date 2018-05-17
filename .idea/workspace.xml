@@ -2,21 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17cbf1dd-9911-49e4-bd39-6f71f245cb5f" name="Default" comment="Calendar Month view now works in firefox, required changing date formats to yyyy-mm-dd. Dropdown on Month view to only show selected team's events now works.">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/editTeam.html" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controller/CalendarController.groovy" afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/CalendarController.groovy" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/model/Event.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/model/Event.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/edit.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/edit.html" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controller/TeamController.groovy" afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/TeamController.groovy" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editEvent.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/editEvent.html" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/viewEvent.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/viewEvent.html" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fullcalendar/demos/basic-views.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/fullcalendar/demos/basic-views.html" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/configuration/SecurityConfiguration.class" afterPath="$PROJECT_DIR$/target/classes/com/example/configuration/SecurityConfiguration.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/controller/CalendarController$_calender_closure1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/controller/CalendarController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/controller/CalendarController$_calender_closure1.class" afterPath="$PROJECT_DIR$/target/classes/com/example/controller/CalendarController$_calender_closure1.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/controller/CalendarController.class" afterPath="$PROJECT_DIR$/target/classes/com/example/controller/CalendarController.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/controller/PairController.class" afterPath="$PROJECT_DIR$/target/classes/com/example/controller/PairController.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/controller/TeamController.class" afterPath="$PROJECT_DIR$/target/classes/com/example/controller/TeamController.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/model/Event.class" afterPath="$PROJECT_DIR$/target/classes/com/example/model/Event.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/repository/EventRepository.class" afterPath="$PROJECT_DIR$/target/classes/com/example/repository/EventRepository.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/service/EventService.class" afterPath="$PROJECT_DIR$/target/classes/com/example/service/EventService.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/service/EventServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/example/service/EventServiceImpl.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/addTeam.html" afterPath="$PROJECT_DIR$/target/classes/templates/addTeam.html" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/edit.html" afterPath="$PROJECT_DIR$/target/classes/templates/edit.html" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/editEvent.html" afterPath="$PROJECT_DIR$/target/classes/templates/editEvent.html" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/viewEvent.html" afterPath="$PROJECT_DIR$/target/classes/templates/viewEvent.html" />
       <change beforePath="$PROJECT_DIR$/target/demo-0.0.1-SNAPSHOT.jar" afterPath="" />
       <change beforePath="$PROJECT_DIR$/target/demo-0.0.1-SNAPSHOT.jar.original" afterPath="$PROJECT_DIR$/target/demo-0.0.1-SNAPSHOT.jar.original" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
@@ -42,33 +46,8 @@
       <file leaf-file-name="CalendarController.groovy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/CalendarController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="392" column="56" lean-forward="false" selection-start-line="392" selection-start-column="56" selection-end-line="392" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Event.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/model/Event.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1106">
-              <caret line="107" column="19" lean-forward="false" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
-              <folding>
-                <element signature="e#2180#2181#0" expanded="true" />
-                <element signature="e#2211#2212#0" expanded="true" />
-                <element signature="e#2256#2257#0" expanded="true" />
-                <element signature="e#2289#2290#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PairController.groovy" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/PairController.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+            <state relative-caret-position="242">
+              <caret line="249" column="0" lean-forward="false" selection-start-line="249" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -94,11 +73,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="viewEvent.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="viewEvent.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/viewEvent.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="89" column="32" lean-forward="false" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
+            <state relative-caret-position="372">
+              <caret line="95" column="5" lean-forward="false" selection-start-line="95" selection-start-column="5" selection-end-line="95" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TeamController.groovy" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/TeamController.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/model/Team.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editTeam.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editTeam.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="353">
+              <caret line="47" column="62" lean-forward="false" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -119,8 +128,8 @@
       <file leaf-file-name="editEvent.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editEvent.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1422">
-              <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="197" selection-end-column="29" />
+            <state relative-caret-position="480">
+              <caret line="192" column="27" lean-forward="false" selection-start-line="180" selection-start-column="24" selection-end-line="192" selection-end-column="27" />
               <folding>
                 <element signature="n#style#0;n#input#2;n#label#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -128,11 +137,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="host.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/host.css">
+      <file leaf-file-name="basic-views.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fullcalendar/demos/basic-views.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="210">
+              <caret line="110" column="63" lean-forward="false" selection-start-line="110" selection-start-column="63" selection-end-line="110" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -242,19 +251,20 @@
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/model/Event.groovy" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/model/Team.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/fullcalendar/demos/basic-views.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/service/EventServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/repository/EventRepository.groovy" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/service/EventService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/controller/PairController.groovy" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/configuration/SecurityConfiguration.groovy" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/controller/TeamController.groovy" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/addTeam.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/model/Event.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/edit.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/editEvent.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/controller/CalendarController.groovy" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/viewEvent.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/controller/TeamController.groovy" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/controller/CalendarController.groovy" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/editEvent.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/fullcalendar/demos/basic-views.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/editTeam.html" />
       </list>
     </option>
   </component>
@@ -637,7 +647,7 @@
       <workItem from="1526313344091" duration="10200000" />
       <workItem from="1526330614001" duration="553000" />
       <workItem from="1526349611191" duration="334000" />
-      <workItem from="1526481872554" duration="9238000" />
+      <workItem from="1526481872554" duration="15584000" />
     </task>
     <task id="LOCAL-00001" summary="Adding lots of stuff">
       <created>1521653214123</created>
@@ -702,11 +712,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526486550488</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added locking to account so other users can't delete/edit.">
+      <created>1526495429863</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1526495429863</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="333296000" />
+    <option name="totallyTimeSpent" value="339642000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1922" height="1056" extended-state="6" />
@@ -800,7 +817,8 @@
     <MESSAGE value="Calendar Month view now works in firefox, required changing date formats to yyyy-mm-dd. Dropdown on Month view to only show selected team's events now works." />
     <MESSAGE value="Clicking on a day now populates the start date with that day. Code cleanup" />
     <MESSAGE value="Fixed some bugs, added sanitation on team names and fixed incorrect date formatting." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed some bugs, added sanitation on team names and fixed incorrect date formatting." />
+    <MESSAGE value="Added locking to account so other users can't delete/edit." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added locking to account so other users can't delete/edit." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -811,7 +829,7 @@
           <properties />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="37" />
+      <option name="time" value="38" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -830,13 +848,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/slack.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="61" lean-forward="false" selection-start-line="11" selection-start-column="61" selection-end-line="11" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/configuration/WebMvcConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1045,13 +1056,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fullcalendar/demos/basic-views.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="17" lean-forward="false" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.3.4.RELEASE/spring-webmvc-4.3.4.RELEASE.jar!/org/springframework/web/servlet/ModelAndView.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
@@ -1077,14 +1081,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/model/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1145,14 +1141,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/TeamController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-162">
-          <caret line="38" column="59" lean-forward="false" selection-start-line="38" selection-start-column="59" selection-end-line="38" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/addTeam.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -1179,41 +1167,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/model/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1106">
+          <caret line="107" column="19" lean-forward="false" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
+          <folding>
+            <element signature="e#2180#2181#0" expanded="false" />
+            <element signature="e#2211#2212#0" expanded="false" />
+            <element signature="e#2256#2257#0" expanded="false" />
+            <element signature="e#2289#2290#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/viewEvent.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="95" column="5" lean-forward="false" selection-start-line="95" selection-start-column="5" selection-end-line="95" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/model/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/TeamController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/CalendarController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="249" column="0" lean-forward="false" selection-start-line="249" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editEvent.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1422">
-          <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="197" selection-end-column="29" />
+        <state relative-caret-position="480">
+          <caret line="192" column="27" lean-forward="false" selection-start-line="180" selection-start-column="24" selection-end-line="192" selection-end-column="27" />
           <folding>
             <element signature="n#style#0;n#input#2;n#label#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/model/Event.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fullcalendar/demos/basic-views.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1106">
-          <caret line="107" column="19" lean-forward="false" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
-          <folding>
-            <element signature="e#2180#2181#0" expanded="true" />
-            <element signature="e#2211#2212#0" expanded="true" />
-            <element signature="e#2256#2257#0" expanded="true" />
-            <element signature="e#2289#2290#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/CalendarController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="392" column="56" lean-forward="false" selection-start-line="392" selection-start-column="56" selection-end-line="392" selection-end-column="56" />
+        <state relative-caret-position="210">
+          <caret line="110" column="63" lean-forward="false" selection-start-line="110" selection-start-column="63" selection-end-line="110" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/viewEvent.html">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editTeam.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="89" column="32" lean-forward="false" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
+        <state relative-caret-position="353">
+          <caret line="47" column="62" lean-forward="false" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
           <folding />
         </state>
       </provider>
