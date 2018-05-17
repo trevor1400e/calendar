@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="17cbf1dd-9911-49e4-bd39-6f71f245cb5f" name="Default" comment="Calendar Month view now works in firefox, required changing date formats to yyyy-mm-dd. Dropdown on Month view to only show selected team's events now works.">
+    <list default="true" id="17cbf1dd-9911-49e4-bd39-6f71f245cb5f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -700,11 +700,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526587447080</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Push because weird glitches happening with other commit. Not sure why.">
+      <created>1526591109459</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1526591109459</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="341178000" />
+    <option name="totallyTimeSpent" value="341256000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1922" height="1056" extended-state="6" />
@@ -827,7 +834,8 @@
     <MESSAGE value="Fixed some bugs, added sanitation on team names and fixed incorrect date formatting." />
     <MESSAGE value="Added locking to account so other users can't delete/edit." />
     <MESSAGE value="Filtered teams, added edit teams, fixed team w no event." />
-    <option name="LAST_COMMIT_MESSAGE" value="Filtered teams, added edit teams, fixed team w no event." />
+    <MESSAGE value="Push because weird glitches happening with other commit. Not sure why." />
+    <option name="LAST_COMMIT_MESSAGE" value="Push because weird glitches happening with other commit. Not sure why." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
