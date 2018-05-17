@@ -66,7 +66,7 @@
                         <!-- Send Button -->
                         <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button>
                         <span th:utext="${successMessage}"></span>
-                        <span th:utext="${errorMessage}" style="color: red"></span>
+                        <span th:utext="${errorMessage}" style="color: red;"></span>
                         <script th:inline="javascript">
                             /*<![CDATA[*/
                             if([[${successMessage}]] != null) {

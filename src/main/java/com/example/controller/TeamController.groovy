@@ -56,10 +56,9 @@ class TeamController {
 
         Team existingTeam = teamRepository.findByteamname(team.teamname)
         if(existingTeam){
-            bindingResult.addError(new ObjectError("TeamDuplicationError", "Team ${team.teamname} already exists."))
+            bindingResult.addError(new ObjectError("TeamDuplicationError", "Team already exists."))
         }
 
-        Boolean isTeamNameDuplicate
         for (Map.Entry<String, String> userInfo : map.entrySet()) {
             if (userInfo.getKey() == "name") {
                 username = userInfo.getValue()
