@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.validation.BindingResult
+import org.springframework.validation.ObjectError
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.ModelAndView
 
@@ -29,6 +30,10 @@ class CalendarController {
 
     @Autowired
     private TeamRepository teamRepository
+
+    //TODO: Clientside validation for no teams, invalid dates, etc.
+    //TODO: Fix ugly CSS
+    //TODO: serverside validation for invalid posts/unauthenticated.
 
     @RequestMapping(value = "/calendar/{date}", method = RequestMethod.GET)
     public ModelAndView calender(
@@ -52,11 +57,6 @@ class CalendarController {
         } else {
             username = "Anonymousss"
         }
-//        if (team == null) {
-//            team = "ALL"
-//        }
-
-        println(team)
 
         //User user = userService.findUserByEmail(auth.getName())
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
@@ -148,8 +148,11 @@ class CalendarController {
         String userEmail = "null"
         Map<String, String> map = auth.principal
 
-        String[] teams = teamName.split(",")
+        if(teamName == ""){
+            bindingResult.addError(new ObjectError("NoTeam", "No Team"))
+        }
 
+        String[] teams = teamName.split(",")
 
         for (Map.Entry<String, String> userInfo : map.entrySet()) {
             if (userInfo.getKey() == "name") {
@@ -186,6 +189,7 @@ class CalendarController {
         println(teamName)
         if (bindingResult.hasErrors()) {
             println("there was an error")
+            modelAndView.addObject("errorMessage", "No team(s) checked.")
             modelAndView.setViewName("edit");
         } else {
             println("trying to save")
@@ -207,13 +211,12 @@ class CalendarController {
             modelAndView.addObject("successMessage", "Event has been registered successfully");
             //modelAndView.addObject("event", new Event());
             modelAndView.addObject("event", event);
-            modelAndView.addObject("userName", username)
-            // modelAndView.addObject("events", events)
-            modelAndView.addObject("dateUpdate", dateUpdate)
-            modelAndView.addObject("curDate", timeStamp)
+
             modelAndView.setViewName("edit")
         }
-
+        modelAndView.addObject("userName", username)
+        modelAndView.addObject("dateUpdate", dateUpdate)
+        modelAndView.addObject("curDate", timeStamp)
         return modelAndView
     }
 
@@ -250,7 +253,6 @@ class CalendarController {
 
         isLocked = event.getLocked()
 
-
         modelAndView.addObject("event", event)
         modelAndView.addObject("teams", teams);
         modelAndView.addObject("eventDate", eventDate)
@@ -286,6 +288,10 @@ class CalendarController {
         Map<String, String> map = auth.principal
         Event eventcheck = eventRepository.findById(eventId)
 
+        if(teamName == ""){
+            bindingResult.addError(new ObjectError("NoTeam", "No Team"))
+        }
+
         //blue,green,red
         String[] teams = teamName.split(",")
 
@@ -320,6 +326,32 @@ class CalendarController {
 
 
         if (bindingResult.hasErrors()) {
+           Event originalEvent = eventRepository.findById(event.id)
+
+           Boolean hasEndDate = (originalEvent.enddate != null)
+           Boolean hasTime = originalEvent.date.contains("T")
+           Boolean hasTeams = originalEvent.teams.size() > 1
+
+           List<String> teamNames = []
+           originalEvent.teams.each({ Team t -> teamNames.add(t.teamname) })
+
+            List<Team> teams2 = teamRepository.findAll()
+
+
+            Boolean isLocked = originalEvent.getLocked()
+
+            modelAndView.addObject("event", originalEvent)
+            modelAndView.addObject("teams", teams2);
+            //modelAndView.addObject("events", events)
+            modelAndView.addObject("eventId", eventId)
+            modelAndView.addObject("hasEndDate", hasEndDate)
+            modelAndView.addObject("hasTime", hasTime)
+            modelAndView.addObject("hasTeams", hasTeams)
+            modelAndView.addObject("teamNames", teamNames)
+            modelAndView.addObject("isLocked", isLocked)
+
+            modelAndView.addObject("errorMessage", "No team(s) checked.")
+
             modelAndView.setViewName("editEvent");
         } else {
             event.id = eventId
@@ -352,12 +384,11 @@ class CalendarController {
             modelAndView.addObject("successMessage", "Event has been edited successfully");
             //modelAndView.addObject("event", new Event());
             modelAndView.addObject("event", event);
-            modelAndView.addObject("userName", username)
-            // modelAndView.addObject("events", events)
-//            modelAndView.addObject("dateUpdate", dateUpdate)
-            modelAndView.addObject("curDate", timeStamp)
             modelAndView.setViewName("editEvent")
         }
+
+        modelAndView.addObject("userName", username)
+        modelAndView.addObject("curDate", timeStamp)
         return modelAndView
     }
 
@@ -401,7 +432,6 @@ class CalendarController {
         modelAndView.addObject("hasTeams", hasTeams)
         modelAndView.addObject("teamnames", teamnames)
         modelAndView.addObject("hasend", hasend)
-
 
 
         modelAndView.setViewName("viewEvent")

@@ -69,8 +69,8 @@
                                 <div class="col-sm-12">
                                     <div class="button-group">
                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle col-sm-6" data-toggle="dropdown"><span class="glyphicon glyphicon-user"> Team</span> <span class="caret"></span></button>
-                                        <ul class="dropdown-menu" >
-                                                <li th:each="operator : ${teams}" >
+                                        <ul class="dropdown-menu">
+                                                <li th:each="operator : ${teams}">
                                                     <a href="#" class="small" th:id="${operator.teamname}" tabIndex="999" ><input type="checkbox" th:text="${'&nbsp;'+operator.teamname}"/></a>
                                                 </li>
                                         </ul>
@@ -98,7 +98,6 @@
                                 }
 
                                 $( event.target ).blur();
-                                console.log(options)
                                 document.getElementById("changeme").value = options;
                                 return false;
                             });
@@ -191,6 +190,7 @@
                     <!-- Send Button -->
                         <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button>
                         <span th:utext="${successMessage}"></span>
+                        <span th:utext="${errorMessage}" style="color: red"></span>
                     <script th:inline="javascript">
                         /*<![CDATA[*/
                         if([[${successMessage}]] != null) {
