@@ -55,7 +55,7 @@ class CalendarController {
 
             username = slackName
         } else {
-            username = "Anonymousss"
+            username = "Anonymous"
         }
 
         //User user = userService.findUserByEmail(auth.getName())
@@ -179,10 +179,10 @@ class CalendarController {
         }
 
         if (endDateAndTime.length() > 11) {
-            LocalDateTime fancyDate2 = LocalDateTime.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
+            LocalDateTime fancyDate2 = LocalDateTime.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a")).plusDays(1)
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
         } else if (endDateAndTime != null && endDateAndTime != '') {
-            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+            LocalDate fancyDate2 = LocalDate.parse(endDateAndTime, DateTimeFormatter.ofPattern("yyyy-MM-dd")).plusDays(1)
             reformattedDate3 = fancyDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
