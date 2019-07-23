@@ -105,9 +105,10 @@
     <div class="col-12">
         <h4 style="margin: auto">Show only team: </h4>
         <select id="theTeam">
-            <option th:each="operator : ${teams}" th:value="${operator.teamname}" th:text="${operator.teamname}"></option>
+            <option th:each="operator : ${teams}" th:value="${operator.teamname}" th:id="${operator.id}" th:text="${operator.teamname}"></option>
         </select>
         <input type="button" id="change" value="Go" onclick="teamUrl()"/> <a href="/team/add"> Add Team</a>
+        <a href="#" onclick="editTeam()" style="padding-left: 8px">Edit Team</a>
     </div>
 </div>
 <script>
@@ -115,6 +116,15 @@
         var teamName = document.getElementById("theTeam").value;
         window.location.href = window.location.origin + '/calendar/' + moment().format('YYYY-MM-DD') +'?team='+teamName;
     }
+    
+    function editTeam() {
+        var selectedTeam = document.getElementById("theTeam").value
+
+        var teamId = document.querySelector('option[value='+selectedTeam+']').id;
+
+        window.location.href = window.location.origin + '/team/edit/' + teamId;
+    }
+
 </script>
 </body>
 </html>

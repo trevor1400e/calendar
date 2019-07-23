@@ -56,6 +56,7 @@
                         <br/>
                         <input type="text" name="description" id="description" th:field="*{description}" class="form"
                                placeholder="Event Description (Optional)"/>
+                        <input type="text" name="theId" id="theId" th:field="*{id}" class="hidden"/>
 
                     </div><!-- End Left Inputs -->
                     <!-- Right Inputs -->
@@ -78,7 +79,6 @@
                             /*<![CDATA[*/
                             var theTeamNames = [[${teamNames}]]
                             //'[blueguy]'
-                            console.log(theTeamNames)
                             var options = [];
                             theTeamNames.forEach(checkTeams)
                             /*]]>*/
@@ -114,7 +114,6 @@
                                 }
 
                                 $( event.target ).blur();
-                                console.log(options)
                                 document.getElementById("changeme").value = options;
                                 return false;
                             });
@@ -125,6 +124,8 @@
                             <input type="checkbox" id="interval" style="z-index: 5"/>
                             Multiple Days:
                             <input type="checkbox" id="multiday" style="z-index: 5"/>
+                            Lock To Creator:
+                            <input type="checkbox" name="islocked" id="islocked2" value="unchecked" style="z-index: 5"/>
                         </label>
                         <div class="form-group" style="margin: 0px" >
                             <div class='input-group date col-xs-6' id="datetimepicker1" style="display: inline-table">
@@ -158,6 +159,11 @@
 
                         if([[${hasTime}]]){
                             $('#interval').prop('checked', true)
+                        }
+
+                        if([[${isLocked}]]){
+                            $('#islocked2').prop('checked', true)
+                            $('#islocked2').val("true");
                         }
 
                         $(function () {
@@ -195,6 +201,14 @@
                                 $('#datetimepicker2').addClass("hidden");
                             }
                         });
+
+                        $("#islocked2").change(function () {
+
+                            if($(this).prop("checked") == true){
+
+                                $('#islocked2').val("true");
+                            }
+                        });
                         /*]]>*/
                         </script>
                         <br/>
@@ -207,6 +221,7 @@
                         <!-- Send Button -->
                         <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button>
                         <span th:utext="${successMessage}"></span>
+                        <span th:utext="${errorMessage}" style="color: red"></span>
                         <script th:inline="javascript">
                             /*<![CDATA[*/
                             if([[${successMessage}]] != null) {

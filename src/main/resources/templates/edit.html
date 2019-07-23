@@ -69,8 +69,8 @@
                                 <div class="col-sm-12">
                                     <div class="button-group">
                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle col-sm-6" data-toggle="dropdown"><span class="glyphicon glyphicon-user"> Team</span> <span class="caret"></span></button>
-                                        <ul class="dropdown-menu" >
-                                                <li th:each="operator : ${teams}" >
+                                        <ul class="dropdown-menu">
+                                                <li th:each="operator : ${teams}">
                                                     <a href="#" class="small" th:id="${operator.teamname}" tabIndex="999" ><input type="checkbox" th:text="${'&nbsp;'+operator.teamname}"/></a>
                                                 </li>
                                         </ul>
@@ -98,7 +98,6 @@
                                 }
 
                                 $( event.target ).blur();
-                                console.log(options)
                                 document.getElementById("changeme").value = options;
                                 return false;
                             });
@@ -113,8 +112,10 @@
                         <label>
                         Time:
                             <input type="checkbox" id="interval" style="z-index: 5"/>
-                         Multiple Days:
+                        Multiple Days:
                             <input type="checkbox" id="multiday" style="z-index: 5"/>
+                        Lock To Creator:
+                            <input type="checkbox" name="islocked" id="islocked2" value="unchecked" style="z-index: 5"/>
                         </label>
                         <div class="form-group" style="margin: 0px" >
                                 <div class='input-group date col-xs-6' id="datetimepicker1" style="display: inline-table">
@@ -170,6 +171,14 @@
                                 }
                             });
 
+                            $("#islocked2").change(function () {
+
+                                if($(this).prop("checked") == true){
+
+                                    $('#islocked2').val("true");
+                                }
+                            });
+
                         </script>
 
 
@@ -181,6 +190,7 @@
                     <!-- Send Button -->
                         <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button>
                         <span th:utext="${successMessage}"></span>
+                        <span th:utext="${errorMessage}" style="color: red"></span>
                     <script th:inline="javascript">
                         /*<![CDATA[*/
                         if([[${successMessage}]] != null) {

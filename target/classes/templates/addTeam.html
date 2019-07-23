@@ -6,6 +6,7 @@
     <title>Create Page</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/host.css}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -65,6 +66,14 @@
                         <!-- Send Button -->
                         <button type="submit" id="submit" name="submit" class="form-btn semibold">Post</button>
                         <span th:utext="${successMessage}"></span>
+                        <span th:utext="${errorMessage}" style="color: red;"></span>
+                        <script th:inline="javascript">
+                            /*<![CDATA[*/
+                            if([[${successMessage}]] != null) {
+                                window.location.href = window.location.origin + '/calendar/' + moment().format('YYYY-MM-DD')
+                            }
+                            /*]]>*/
+                        </script>
                     </div><!-- End Bottom Submit -->
                     <!-- Clear -->
                     <div class="clear"></div>
