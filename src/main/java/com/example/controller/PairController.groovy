@@ -20,14 +20,14 @@ class PairController {
     public ModelAndView calender() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = "null"
-        Map<String, String> map = auth.principal
+        String username = "Anonymous"
+        //Map<String, String> map = auth.principal
 
-        for (Map.Entry<String, String> userInfo : map.entrySet()) {
-            if (userInfo.getKey() == "name") {
-                username = userInfo.getValue()
-            }
-        }
+//        for (Map.Entry<String, String> userInfo : map.entrySet()) {
+//            if (userInfo.getKey() == "name") {
+//                username = userInfo.getValue()
+//            }
+//        }
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
         modelAndView.addObject("Date", timeStamp)

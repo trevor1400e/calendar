@@ -29,15 +29,15 @@ class TeamController {
     public ModelAndView addTeam() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = "null"
-        Map<String, String> map = auth.principal
+        String username = "Anonymous"
+        //Map<String, String> map = auth.principal
         Team team = new Team()
 
-        for (Map.Entry<String, String> userInfo : map.entrySet()) {
-            if (userInfo.getKey() == "name") {
-                username = userInfo.getValue()
-            }
-        }
+//        for (Map.Entry<String, String> userInfo : map.entrySet()) {
+//            if (userInfo.getKey() == "name") {
+//                username = userInfo.getValue()
+//            }
+//        }
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
         modelAndView.addObject("Date", timeStamp)
@@ -51,19 +51,19 @@ class TeamController {
     public ModelAndView postTeam(@Valid Team team, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = "null"
-        Map<String, String> map = auth.principal
+        String username = "Anonymous"
+        //Map<String, String> map = auth.principal
 
         Team existingTeam = teamRepository.findByteamname(team.teamname)
         if(existingTeam){
             bindingResult.addError(new ObjectError("TeamDuplicationError", "Team already exists."))
         }
 
-        for (Map.Entry<String, String> userInfo : map.entrySet()) {
-            if (userInfo.getKey() == "name") {
-                username = userInfo.getValue()
-            }
-        }
+//        for (Map.Entry<String, String> userInfo : map.entrySet()) {
+//            if (userInfo.getKey() == "name") {
+//                username = userInfo.getValue()
+//            }
+//        }
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
         if (bindingResult.hasErrors()) {
@@ -89,15 +89,15 @@ class TeamController {
     public ModelAndView editTeam(@PathVariable int teamId) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = "null"
-        Map<String, String> map = auth.principal
+        String username = "Anonymous"
+        //Map<String, String> map = auth.principal
         Team team = teamRepository.findById(teamId)
 
-        for (Map.Entry<String, String> userInfo : map.entrySet()) {
-            if (userInfo.getKey() == "name") {
-                username = userInfo.getValue()
-            }
-        }
+//        for (Map.Entry<String, String> userInfo : map.entrySet()) {
+//            if (userInfo.getKey() == "name") {
+//                username = userInfo.getValue()
+//            }
+//        }
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
         modelAndView.addObject("Date", timeStamp)
@@ -111,14 +111,14 @@ class TeamController {
     public ModelAndView postEditTeam(@Valid Team team, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = "null"
-        Map<String, String> map = auth.principal
+        String username = "Anonymous"
+        //Map<String, String> map = auth.principal
 
-        for (Map.Entry<String, String> userInfo : map.entrySet()) {
-            if (userInfo.getKey() == "name") {
-                username = userInfo.getValue()
-            }
-        }
+//        for (Map.Entry<String, String> userInfo : map.entrySet()) {
+//            if (userInfo.getKey() == "name") {
+//                username = userInfo.getValue()
+//            }
+//        }
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
         if (bindingResult.hasErrors()) {

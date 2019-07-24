@@ -40,20 +40,20 @@ class CalendarController {
             @PathVariable String date, @RequestParam(required = false, value = "team") String team) {
         ModelAndView modelAndView = new ModelAndView()
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
-        String username = "null"
+        String username = "Anonymous"
         List<Event> events;
 
         if (auth.principal != "anonymousUser") {
-            Map<String, String> map = auth.principal
-            println(map)
+            //Map<String, String> map = auth.principal
+            //println(map)
 
-            Map.Entry<String, String> entry = map.entrySet().iterator().next();
-            String key = entry.getKey()
-            String slackName = entry.getValue()
-            System.out.println(key) //literal name
-            System.out.println(slackName) //their name
+//            Map.Entry<String, String> entry = map.entrySet().iterator().next();
+//            String key = entry.getKey()
+//            String slackName = entry.getValue()
+//            System.out.println(key) //literal name
+//            System.out.println(slackName) //their name
 
-            username = slackName
+            //username = slackName
         } else {
             username = "Anonymous"
         }
@@ -104,17 +104,17 @@ class CalendarController {
         ModelAndView modelAndView = new ModelAndView()
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
         User userExists = userService.findUserByEmail(auth.getName());
-        String username = "null"
-        String userEmail = "null"
-        Map<String, String> map = auth.principal
+        String username = "Anonymous"
+        String userEmail = "Anonymous"
+        //Map<String, String> map = auth.principal
 
-        for (Map.Entry<String, String> userInfo : map.entrySet()) {
-            if (userInfo.getKey() == "name") {
-                username = userInfo.getValue()
-            } else if (userInfo.getKey() == "email") {
-                userEmail = userInfo.getValue()
-            }
-        }
+//        for (Map.Entry<String, String> userInfo : map.entrySet()) {
+//            if (userInfo.getKey() == "name") {
+//                username = userInfo.getValue()
+//            } else if (userInfo.getKey() == "email") {
+//                userEmail = userInfo.getValue()
+//            }
+//        }
 
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
 
@@ -144,9 +144,9 @@ class CalendarController {
             @Valid Event event, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView()
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
-        String username = "null"
-        String userEmail = "null"
-        Map<String, String> map = auth.principal
+        String username = "Anonymous"
+        String userEmail = "Anonymous"
+//        Map<String, String> map = auth.principal
 
         if(teamName == ""){
             bindingResult.addError(new ObjectError("NoTeam", "No Team"))
@@ -154,13 +154,13 @@ class CalendarController {
 
         String[] teams = teamName.split(",")
 
-        for (Map.Entry<String, String> userInfo : map.entrySet()) {
-            if (userInfo.getKey() == "name") {
-                username = userInfo.getValue()
-            } else if (userInfo.getKey() == "email") {
-                userEmail = userInfo.getValue()
-            }
-        }
+//        for (Map.Entry<String, String> userInfo : map.entrySet()) {
+//            if (userInfo.getKey() == "name") {
+//                username = userInfo.getValue()
+//            } else if (userInfo.getKey() == "email") {
+//                userEmail = userInfo.getValue()
+//            }
+//        }
 
         println(dateAndTime)
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
@@ -225,18 +225,18 @@ class CalendarController {
         ModelAndView modelAndView = new ModelAndView()
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
         User userExists = userService.findUserByEmail(auth.getName());
-        String username = "null"
-        Map<String, String> map = auth.principal
+        String username = "Anonymous"
+        //Map<String, String> map = auth.principal
 
         boolean hasEndDate;
         boolean hasTime
         boolean hasTeams
         boolean isLocked
 
-        Map.Entry<String, String> entry = map.entrySet().iterator().next();
-        String key = entry.getKey()
-        String slackName = entry.getValue()
-        username = slackName
+//        Map.Entry<String, String> entry = map.entrySet().iterator().next();
+//        String key = entry.getKey()
+//        String slackName = entry.getValue()
+//        username = slackName
 
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
         List<Team> teams = teamRepository.findAll()
@@ -283,9 +283,9 @@ class CalendarController {
         ModelAndView modelAndView = new ModelAndView()
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
         User userExists = userService.findUserByEmail(auth.getName());
-        String username = "null"
-        String userEmail = "null"
-        Map<String, String> map = auth.principal
+        String username = "Anonymous"
+        String userEmail = "Anonymous"
+        //Map<String, String> map = auth.principal
         Event eventcheck = eventRepository.findById(eventId)
 
         if(teamName == ""){
@@ -295,13 +295,13 @@ class CalendarController {
         //blue,green,red
         String[] teams = teamName.split(",")
 
-        for (Map.Entry<String, String> userInfo : map.entrySet()) {
-            if (userInfo.getKey() == "name") {
-                username = userInfo.getValue()
-            } else if (userInfo.getKey() == "email") {
-                userEmail = userInfo.getValue()
-            }
-        }
+//        for (Map.Entry<String, String> userInfo : map.entrySet()) {
+//            if (userInfo.getKey() == "name") {
+//                username = userInfo.getValue()
+//            } else if (userInfo.getKey() == "email") {
+//                userEmail = userInfo.getValue()
+//            }
+//        }
 
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
 
@@ -397,17 +397,17 @@ class CalendarController {
         ModelAndView modelAndView = new ModelAndView()
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
         User userExists = userService.findUserByEmail(auth.getName());
-        String username = "null"
-        Map<String, String> map = auth.principal
+        String username = "Anonymous"
+        //Map<String, String> map = auth.principal
 
         Boolean hasTeams;
         String teamnames
         Boolean hasend = false;
 
-        Map.Entry<String, String> entry = map.entrySet().iterator().next();
-        String key = entry.getKey()
-        String slackName = entry.getValue()
-        username = slackName
+//        Map.Entry<String, String> entry = map.entrySet().iterator().next();
+//        String key = entry.getKey()
+//        String slackName = entry.getValue()
+//        username = slackName
 
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())
 

@@ -32,10 +32,9 @@ public class SlackUserServiceImpl implements SlackUserService {
     @Override
     void saveSlackUser(SlackUser slackUser) {
         slackUser.setToken(bCryptPasswordEncoder.encode(slackUser.getToken()))
-        //Role userRole = roleRepository.findByRole("USER") fuck this stupid role shit
+        //Role userRole = roleRepository.findByRole("USER")
         //slackUser.setRoles(new HashSet<Role>(Arrays.asList(userRole)))
         slackUserRepository.save(slackUser)
-
 
     }
 

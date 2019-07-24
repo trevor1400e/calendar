@@ -46,24 +46,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.
+        http.csrf().disable().
                 authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/slack").permitAll()
-                .antMatchers("/registration").permitAll()
-                .regexMatchers("/calendar/\\d{4}-\\d{2}-\\d{2}/\\?team=lunch").permitAll()
-                .antMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-                .authenticated().and().csrf().disable().formLogin()
-                .loginPage("/slack").failureUrl("/slack?error=true")
-                .defaultSuccessUrl("/calendar/" + new Date().format("yyyy-MM-dd"))
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .and().logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").and().exceptionHandling()
-                .accessDeniedPage("/access-denied");
+                .antMatchers("/**").permitAll()
+                .antMatchers("/calendar/**").permitAll()
+//                .antMatchers("/login").permitAll()
+//                .antMatchers("/slack").permitAll()
+//                .antMatchers("/registration").permitAll()
+//                .regexMatchers("/calendar/\\d{4}-\\d{2}-\\d{2}/\\?team=lunch").permitAll()
+//                .antMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+//                .authenticated().and().csrf().disable().formLogin()
+//                .loginPage("/slack").failureUrl("/slack?error=true")
+//                .defaultSuccessUrl("/calendar/" + new Date().format("yyyy-MM-dd"))
+//                .usernameParameter("email")
+//                .passwordParameter("password")
+//                .and().logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/").and().exceptionHandling()
+//                .accessDeniedPage("/access-denied");
     }
 
     @Override
